@@ -1,0 +1,164 @@
+.form-control {height:28px;padding:3px 6px} 
+.form-group {margin-bottom:5px;}
+.input-group-addon {padding:3px 12px}
+.btn-primary {background-color:#4285f4;border-color:#0179d9}
+.mg-left {margin-left:10px}
+.dataTable > thead > tr > th[class*="sort"]::after
+{
+	display: none;
+}
+.btn {padding:3px 12px}
+.form-control-feedback {right:5px;font-size:16px}
+.login-box-body .form-group {display:inline-block;width:100%;margin-bottom:10px}
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover { background-color: #4285f4;border-color: #0179d9;}
+.nav > li > a {padding:10px 5px;}
+.table-reponsive {
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    width: 100%;
+	 min-height: 0.01%;
+    overflow-x: auto;
+}
+.dataTables_wrapper .row{margin-left:0;margin-right:0}
+.col-left {width:180px;float:left}
+.col-right {width:calc(100% - 180px);float:left}
+.padding-left {padding-left:0;}
+.padding-right {padding-right:0}
+.padding-bottom {padding-bottom:10px}
+.font-weight {font-weight:normal;font-size:14px;color:#0179d9}
+.color-1 {color:#333}
+textarea  .form-control {min-height:28px}
+.column-1 {width:150px;}
+.bg-2 {background:#fff3a5!important}
+.center td {text-align:center}
+.column-3 {width:150px;}
+.margin-tb{margin-top:-10px}
+.middle th, .middle td {vertical-align:middle!important}
+.middle th, .middle td {border-color:#ccc!important; border-bottom-width: 1px!important;}
+.middle th {border-top:1px solid #ccc!important;text-align:Center!important}
+.col-6 {width:50%!important;float:left}
+.block {display:block;font-weight:normal}
+.ph {background:#4285f4;color:#fff;padding:2px 5px;white-space:nowrap}
+.ed {background:#fa8100;color:#fff;padding:2px 5px;white-space:nowrap}
+.ph:hover, .ed:hover {opacity:0.8;color:#fff;}
+.checkbox, .radio {margin-top:0}
+.pd-10 {margin-left:10px}
+.col-5-l {width:calc(50% - 15px)}
+.col-2-c {width:10px;}
+.mg-5 {margin-top:10px}
+.box-header > .box-tools {
+    position: absolute;
+    right: -4px;
+    top: 9px;
+}
+.bg-3 {background:#ffcc99}
+
+
+
+
+
+.float-left, .float-left-header {float:left;margin-right:5px}
+span.float-left{padding: 5px;}
+select.float-left {width:80px!important}
+label.error {color:red!important}
+select.float-left-header{width:200px!important;font-weight: bold;float:left;margin-right:5px}
+displayOutSession{position: fixed;z-index: 10000;width: 100%;padding: 20px;}
+section.sidebar a.active{color:#4285f4}
+.fa-circle-o:before {
+  content: "\f101";
+}
+.sidebar-menu .treeview-menu > li > a > .fa {width:10px}
+.sidebar-menu .treeview-menu > li > a {padding-left:25px}
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {background-color:#1e282c;color:#fff}
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {background:#222d32}
+.skin-blue .sidebar a {
+    color: #b8c7ce;
+}
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a { border-left-color: #1e282c;}
+.skin-blue .sidebar-menu > li > .treeview-menu {background:#2c3b41;color:#8aa4af}
+.skin-blue .treeview-menu > li > a, .skin-blue .sidebar-menu > li.active > a {
+    color: #8aa4af !important;
+}
+.treeview-menu li a.active, .treeview-menu li a:hover {color:#fff!important}
+.skin-blue .main-header .navbar, .skin-blue .main-header .logo, .skin-blue .main-header .logo:hover {
+    background-color: #4285f4;
+}
+.jqx-grid-cell, .jqx-grid-content, .jqx-grid-column-header{
+    white-space: normal !important;
+    height: auto !important;
+}
+.mark, mark {
+    background-color: #ecca19!important;
+}
+.mgTop15{
+    margin-top: 15px;
+}
+.divContent{
+    display: block; width: 100% ; float: left;
+}
+.previewImg {
+    width: 400px;
+    height: 400px;
+}
+.article
+{
+    margin:auto;
+    margin-top:10px;
+}
+.productPreview{
+    height: 100px;
+    margin: 10px; 
+}
+.multipleImage{
+    display: inline-block;
+    width: 100%;
+}
+.productContainer {
+    position: relative;
+    text-align: center;
+    float: left;
+}
+.productContainer img {
+    width: 150px;
+    height: 120px;
+}
+.removeImage{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 33px;
+    background-color: gray;
+    color: white;
+
+}
+.removeImage:hover {
+    background-color: yellow;
+}
+
+.imageBlock {
+    position: relative;
+    text-align: center;
+    float: left;
+    margin-right: 10px;
+}
+.imageBlock img {
+    width: 150px;
+    height: 120px;
+}
+.containerImg{
+    display: inline-block;
+    width: 100%;
+}
+
+.deleteImage{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 33px;
+    background-color: gray;
+    color: white;
+
+}
+.deleteImage:hover {
+    background-color: yellow;
+}
