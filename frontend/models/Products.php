@@ -58,6 +58,7 @@ class Products extends \yii\db\ActiveRecord
                 FROM products pd
                 INNER JOIN product_types pt ON pt.id = pd.id_product_type
                 WHERE pd.id_danhmuc = ".$dataProduct['id_danhmuc']." AND pd.id != ".$dataProduct['id']."
+                ORDER BY pd.view DESC
             ";
             $command = Yii::$app->db->createCommand($sql);
             $data = $command->queryAll();
@@ -122,6 +123,71 @@ class Products extends \yii\db\ActiveRecord
             return $data;
         } catch (Exception $e) {
             return array();
+        }
+    }
+
+    public static function updateWhenViewProduct($dataProduct)
+    {
+        try {
+            $sql = "UPDATE products pd
+                    SET pd.view = pd.view + 1
+                    WHERE pd.id = :productId
+                    ";
+            $command = Yii::$app->db->createCommand($sql);
+            $command->bindValues([
+                ':productId' => $dataProduct['id']
+            ])->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public static function getProductsByDanhMuc($slug, $limit){
+        try {
+            $sql = "
+                SELECT 
+                    pd.*,
+                    ds.name as nameDanhMuc,
+                    ds.slug as slugDanhMuc,
+                    pt.slug as slugProductType
+                FROM products pd
+                INNER JOIN danhmuc_sanpham ds ON ds.id = pd.id_danhmuc
+                INNER JOIN product_types pt ON pt.id = pd.id_product_type
+                WHERE ds.slug = :slug
+                ORDER BY pd.view DESC
+                LIMIT :limitdata
+            ";
+            $command = Yii::$app->db->createCommand($sql);
+            $command->bindValues([
+                ':slug' => $slug,
+                ':limitdata' => $limit != '' && $limit != null ? $limit : 100
+            ]);
+            $data = $command->queryAll();
+            return $data;
+        } catch (Exception $e) {
+            return array();
+        }
+    }
+
+    public static function getTotalProductByDanhMuc($slug){
+        try {
+            $sql = "
+                SELECT 
+                    COUNT(*) as CNT
+                FROM products pd
+                INNER JOIN danhmuc_sanpham ds ON ds.id = pd.id_danhmuc
+                INNER JOIN product_types pt ON pt.id = pd.id_product_type
+                WHERE ds.slug = :slug
+            ";
+            $command = Yii::$app->db->createCommand($sql);
+            $command->bindValues([
+                ':slug' => $slug
+            ]);
+            $data = $command->queryOne();
+            return $data;
+        } catch (Exception $e) {
+            return 0;
         }
     }
 

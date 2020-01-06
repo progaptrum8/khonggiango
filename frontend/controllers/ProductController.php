@@ -14,6 +14,8 @@ use app\models\Products;
 use app\models\ProductTypes;
 use app\models\QlFiledinhkem;
 use app\models\Feedback;
+use yii\data\Pagination;
+use common\components\CommonConst;
 class ProductController extends Controller
 {
 	public $layout = 'homeLayout';
@@ -55,6 +57,9 @@ class ProductController extends Controller
 					$getFeedback = Feedback::getFeedback($dataProduct['id']);
 					$getPreviousProduct = Products::getPreviousProduct($dataProduct);
 					$getNextProduct = Products::getNextProduct($dataProduct);
+
+					//Update view when click detail
+					Products::updateWhenViewProduct($dataProduct);
 					return $this->render('detail', [
 						'dataProduct' => $dataProduct,
 						'danhMucSP' => $danhMucSP,
@@ -79,11 +84,32 @@ class ProductController extends Controller
 
 	public function actionProductOfDanhMuc(){
 		try {
-			echo 'chua code'; exit;
 			$requests = Yii::$app->request->get();
 			$slug = $requests["slug"];
+			$limit = CommonConst::LIMIT_LOAD_PRODUCT;
+			$nameDanhMuc = "";
+			$dataProducts = Products::getProductsByDanhMuc($slug, $limit);
+			$totalProducts = Products::getTotalProductByDanhMuc($slug);
+			$danhMucSP = DanhMucSanPham::find()->asArray()->all();
+			$totalProducts = $totalProducts['CNT'];
+			$pageSize = Yii::$app->request->post("pageSize");
+			$pageSize = 1;
+			if(count($dataProducts) > 0){
+				$nameDanhMuc = $dataProducts[0]['nameDanhMuc'];
+				$pages = new Pagination(['totalCount' => $totalProducts, 'pageSize' => $pageSize]);
+				return $this->render('products-of-danhmuc', [
+					'dataProducts' => $dataProducts,
+					'pages' => $pages,
+					'pageSize' => $pageSize,
+					'slugProductType' => $slug,
+					'nameDanhMuc' => $nameDanhMuc,
+					'danhMucSP' => $danhMucSP
+				]);
+			}else{
+				throw new \yii\web\NotFoundHttpException("No products found!");
+			}
 		} catch (Exception $e) {
-			
+			throw new \yii\web\NotFoundHttpException("No products found!");
 		}
 	}
 
