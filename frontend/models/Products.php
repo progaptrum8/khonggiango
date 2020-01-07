@@ -143,8 +143,20 @@ class Products extends \yii\db\ActiveRecord
         }
     }
 
-    public static function getProductsByDanhMuc($slug, $limit){
+    public static function getProductsByDanhMuc($slug, $limit, $sort, $offset){
         try {
+            $orderBy = "";
+            if($sort == 'default'){
+                $orderBy = " pd.title ASC ";
+            }else if($sort == 'popularity'){
+                $orderBy = " pd.view DESC ";
+            }else if($sort == 'date'){
+                $orderBy = " pd.date_created DESC ";
+            }else if($sort == 'price'){
+                $orderBy = " pd.price ASC ";
+            }else if($sort == 'price-desc'){
+                $orderBy = " pd.price DESC ";
+            }
             $sql = "
                 SELECT 
                     pd.*,
@@ -155,13 +167,14 @@ class Products extends \yii\db\ActiveRecord
                 INNER JOIN danhmuc_sanpham ds ON ds.id = pd.id_danhmuc
                 INNER JOIN product_types pt ON pt.id = pd.id_product_type
                 WHERE ds.slug = :slug
-                ORDER BY pd.view DESC
-                LIMIT :limitdata
+                ORDER BY ".$orderBy."
+                LIMIT :limitdata OFFSET :offset
             ";
             $command = Yii::$app->db->createCommand($sql);
             $command->bindValues([
                 ':slug' => $slug,
-                ':limitdata' => $limit != '' && $limit != null ? $limit : 100
+                ':limitdata' => $limit != '' && $limit != null ? $limit : 100,
+                ':offset' => $offset
             ]);
             $data = $command->queryAll();
             return $data;

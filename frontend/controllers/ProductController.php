@@ -86,17 +86,24 @@ class ProductController extends Controller
 		try {
 			$requests = Yii::$app->request->get();
 			$slug = $requests["slug"];
+			$sort = $requests["sort"];
 			$limit = CommonConst::LIMIT_LOAD_PRODUCT;
 			$nameDanhMuc = "";
-			$dataProducts = Products::getProductsByDanhMuc($slug, $limit);
+			$page = Yii::$app->request->get("page");
+			if($page == '' || $page == null){
+				$page = 1;
+			}
+			$offset = ($page-1)*$limit;
+			if($sort == '' || $sort == null){
+				$sort = 'default';
+			}
+			$dataProducts = Products::getProductsByDanhMuc($slug, $limit, $sort, $offset);
 			$totalProducts = Products::getTotalProductByDanhMuc($slug);
-			$danhMucSP = DanhMucSanPham::find()->asArray()->all();
+			$danhMucSP = DanhMucSanPham::find()->all();
 			$totalProducts = $totalProducts['CNT'];
-			$pageSize = Yii::$app->request->post("pageSize");
-			$pageSize = 1;
 			if(count($dataProducts) > 0){
 				$nameDanhMuc = $dataProducts[0]['nameDanhMuc'];
-				$pages = new Pagination(['totalCount' => $totalProducts, 'pageSize' => $pageSize]);
+				$pages = new Pagination(['totalCount' => $totalProducts, 'pageSize' => $limit]);
 				return $this->render('products-of-danhmuc', [
 					'dataProducts' => $dataProducts,
 					'pages' => $pages,

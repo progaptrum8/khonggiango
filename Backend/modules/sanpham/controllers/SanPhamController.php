@@ -13,6 +13,13 @@ use app\models\QlFiledinhkem;
 
 class SanPhamController extends BaseController {
 
+    public function beforeAction($action)
+    {
+        // Disable csrf
+        $this->enableCsrfValidation = false;
+
+        return parent::beforeAction($action);
+    }
     public function actionIndex() {
         //Tìm kiếm
         $stringCondition = " 1=1 ";
@@ -114,8 +121,9 @@ class SanPhamController extends BaseController {
                 $mime = "";
                 $dataResize = [];
                 $dataFiles = $_FILES['files'];
-
+                var_dump($_FILES); exit;
                 if($_FILES['thumbnail']['size'] > 0) { // save thumbnail image
+                    echo 123; exit;
                     $dataResize = QlFiledinhkem::getDataFileAfterResize($_FILES['thumbnail']);
                 }
                 if(count($dataResize) > 0){

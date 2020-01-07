@@ -967,3 +967,35 @@ th, td {
 .nav>li>a:focus{
     background-color: transparent !important;
 }
+.headerPage{
+    padding-top: 10px;
+}
+.pd0{
+    padding: 0;
+}
+.leftHeaderPage{
+    padding-left: 0px;
+}
+.rightHeaderPage{
+    padding-right: 0px;
+}
+.boldText{
+    font-weight: bold;
+}
+.formSort{
+    padding: 0;
+    max-width: 35%;
+    float: right;
+    margin-top: 0.33em;
+}
+.textSort{
+    text-align: right;
+    left: 70px;
+    margin-top: 10px;
+}
+.mgTop10{
+    margin-top: 10px;
+}
+.boxImgDanhMuc{
+    height: 200px;
+}

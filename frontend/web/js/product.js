@@ -207,4 +207,15 @@ var product = {
     		
     	}
     },
+    changeSort: function(){
+        var slug = $('#slugDanhMuc').val();
+        var sort = $('.orderby').val();
+        window.location.href = "/product/danh-muc/"+slug+"?sort="+sort;
+    },
+    pageClick: function(page){
+        var page = page + 1;
+        var slug = $('#slugDanhMuc').val();
+        var sort = $('.orderby').val();
+        window.location.href = "/product/danh-muc/"+slug+"?sort="+sort+"&page="+page;
+    }
 }
