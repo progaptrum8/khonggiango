@@ -20,13 +20,17 @@
 		<link rel="stylesheet" href="/css/flatsome.css" type="text/css">
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<link rel="stylesheet" type="text/css" href="/css/contact.css">
+		<link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/lightbox.css"/>
 		
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
-		<!-- <script type="text/javascript" src="/js/select2.min.js"></script> -->
 		<script type="text/javascript" src="/js/jquery.validate.js"></script>
 		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/js/product.js"></script>
 		<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="/js/lightbox.js"></script>
+		<script type="text/javascript" src="/js/slick.min.js"></script>
 
 	</head>
 	<body>

@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Url;  
+?>
 <div class="page-wrapper page-left-sidebar">
 	<div class="row">
 		<div id="content" class="large-9 right col" role="main">
@@ -14,7 +17,7 @@
 						<ul id="menu-danh-muc-san-pham" class="menu">
 							<?php foreach ($danhMucSP as $value){ ?>
 								<li id="menu-item" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item">
-									<a href="#"><?=$value->name?></a>
+									<a href="<?=Url::to(['product/product-of-danh-muc' , 'slug' => $value['slug'] ])?>"><?=$value['name']?></a>
 								</li>
 							<?php } ?>
 						</ul>

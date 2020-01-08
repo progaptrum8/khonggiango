@@ -51,7 +51,7 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		$this->view->title = "Không gian gỗ";
-		$danhMucSP = DanhMucSanPham::find()->all();
+		$danhMucSP = DanhMucSanPham::find()->asArray()->all();
 		$getDataHome = Products::getDataHome();
 		$loaiSP = ProductTypes::find()->all();
 		return $this->render('index', [
@@ -94,7 +94,7 @@ class SiteController extends Controller
 	public function actionContact()
 	{
 		$data = Contact::findOne(1);
-		$danhMucSP = DanhMucSanPham::find()->all();
+		$danhMucSP = DanhMucSanPham::find()->asArray()->all();
 		$content = $data->content;
 
 		$this->view->title = "Liên hệ";

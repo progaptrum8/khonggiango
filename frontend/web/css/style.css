@@ -984,13 +984,13 @@ th, td {
 }
 .formSort{
     padding: 0;
-    max-width: 35%;
+    max-width: 40%;
     float: right;
     margin-top: 0.33em;
 }
 .textSort{
     text-align: right;
-    left: 70px;
+    left: 45px;
     margin-top: 10px;
 }
 .mgTop10{
@@ -998,4 +998,16 @@ th, td {
 }
 .boxImgDanhMuc{
     height: 200px;
+}
+.mainSlick{
+    display:block;
+    margin:0 auto;
+}
+.imgChoose{
+    width: 100%;
+    max-height: 300px;
+}
+.imgSlide{
+    width: 100%;
+    max-height: 100px;
 }

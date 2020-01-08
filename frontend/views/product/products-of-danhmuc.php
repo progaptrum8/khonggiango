@@ -6,7 +6,7 @@ use app\components\CustomPagination;
 	<div class="row">
 		<div class="col-sm-6 col-md-6 leftHeaderPage">
 			<div class="is-small mgTop10">
-				<nav class="woocommerce-breadcrumb breadcrumbs"><a href="/shop">Shop</a>
+				<nav class="woocommerce-breadcrumb breadcrumbs"><a href="/shop/index">Shop</a>
 					<span class="divider">/</span> 	
 					<span class="boldText"><?=$nameDanhMuc?></span>
 				</nav>
@@ -17,13 +17,14 @@ use app\components\CustomPagination;
 		 		<p class="col-sm-6 col-md-6 pd0 textSort">Hiển thị một kết quả duy nhất</p>
 		 		<form class="col-sm-6 col-md-6 pd0 formSort pull-right" id="formSort">
 		 			<select class="orderby" onchange="product.changeSort();">
-		 				<option value="default" selected">Thứ tự mặc định</option>
-		 				<option value="popularity">Thứ tự theo mức độ phổ biến</option>
-		 				<option value="date">Mới nhất</option>
-		 				<option value="price">Thứ tự theo giá: thấp đến cao</option>
-		 				<option value="price-desc">Thứ tự theo giá: cao xuống thấp</option>
+		 				<option <?=$sort == 'default' ? 'selected' : ''?> value="default">Thứ tự mặc định</option>
+		 				<option <?=$sort == 'popularity' ? 'selected' : ''?> value="popularity">Thứ tự theo mức độ phổ biến</option>
+		 				<option <?=$sort == 'date' ? 'selected' : ''?> value="date">Mới nhất</option>
+		 				<option <?=$sort == 'price' ? 'selected' : ''?> value="price">Thứ tự theo giá: thấp đến cao</option>
+		 				<option <?=$sort == 'price-desc' ? 'selected' : ''?> value="price-desc">Thứ tự theo giá: cao xuống thấp</option>
 		 			</select>
-		 			<input type="hidden" id="slugDanhMuc" value="<?=$slugProductType?>">
+		 			<input type="hidden" id="slugPage" value="<?=$slugPage?>">
+		 			<input type="hidden" id="pageType" value="productDanhMuc">
 		 		</form>
 		 	</div>
 		</div>
@@ -40,7 +41,7 @@ use app\components\CustomPagination;
 							<ul id="menu-danh-muc-san-pham" class="menu">
 								<?php foreach ($danhMucSP as $value){ ?>
 									<li id="menu-item" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item">
-										<a href="#"><?=$value->name?></a>
+										<a href="<?=Url::to(['product/product-of-danh-muc' , 'slug' => $value['slug'] ])?>"><?=$value['name']?></a>
 									</li>
 								<?php } ?>
 							</ul>
@@ -77,30 +78,34 @@ use app\components\CustomPagination;
 		<div class="col large-9">
 			<div class="shop-container">
 				<div class="products row row-small large-columns-4 medium-columns-3 small-columns-2 has-shadow row-box-shadow-1 row-box-shadow-1-hover">
-					<?php foreach ($dataProducts as $item){ ?>
-						<div class="product-small col has-hover product type-product instock shipping-taxable product-type-simple">
-							<div class="col-inner">
-								<div class="product-small box ">
-									<div class="box-image">
-										<div class="image-none">
-											<a href="<?=Url::to(['product/detail-product','slug' => $item['slug']])?>">
-												<img class="boxImgDanhMuc" src="<?php if($item["thumbnail"] != "" && $item["thumbnail"] != null){ echo $item["thumbnail"]; } else { echo '/images/no-image.png'; } ?>">
-											</a>
-										</div>
-										<div class="box-text box-text-products text-center grid-style-2">
-											<div class="title-wrapper">
-												<p class="name product-title">
-													<a href="<?=Url::to(['product/detail-product','slug' => $item['slug']])?>"><?=$item['title']?></a>
-												</p>
+					<?php if(count($dataProducts) > 0){ ?>
+						<?php foreach ($dataProducts as $item){ ?>
+							<div class="product-small col has-hover product type-product instock shipping-taxable product-type-simple">
+								<div class="col-inner">
+									<div class="product-small box ">
+										<div class="box-image">
+											<div class="image-none">
+												<a href="<?=Url::to(['product/detail-product','slug' => $item['slug']])?>">
+													<img class="boxImgDanhMuc" src="<?php if($item["thumbnail"] != "" && $item["thumbnail"] != null){ echo $item["thumbnail"]; } else { echo '/images/no-image.png'; } ?>">
+												</a>
 											</div>
-											<div class="price-wrapper">
-												<span class="price"><span class="amount">Liên hệ</span></span>
+											<div class="box-text box-text-products text-center grid-style-2">
+												<div class="title-wrapper">
+													<p class="name product-title">
+														<a href="<?=Url::to(['product/detail-product','slug' => $item['slug']])?>"><?=$item['title']?></a>
+													</p>
+												</div>
+												<div class="price-wrapper">
+													<span class="price"><span class="amount">Liên hệ</span></span>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						<?php } ?>
+					<?php } else{ ?>
+						<p>Chưa có sản phẩm.</p>
 					<?php } ?>
 				</div>
 			</div>

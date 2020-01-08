@@ -208,14 +208,29 @@ var product = {
     	}
     },
     changeSort: function(){
-        var slug = $('#slugDanhMuc').val();
+        var slug = $('#slugPage').val();
         var sort = $('.orderby').val();
-        window.location.href = "/product/danh-muc/"+slug+"?sort="+sort;
+        var pageType = $('#pageType').val();
+        if(pageType == 'productType'){
+            window.location.href = "/product/type/"+slug+"?sort="+sort;
+        }else if(pageType == 'productDanhMuc'){
+            window.location.href = "/product/danh-muc/"+slug+"?sort="+sort;
+        }else if(pageType == 'allProduct'){
+            window.location.href = "/shop/index/?sort="+sort;
+        }
+        
     },
     pageClick: function(page){
         var page = page + 1;
-        var slug = $('#slugDanhMuc').val();
+        var slug = $('#slugPage').val();
         var sort = $('.orderby').val();
-        window.location.href = "/product/danh-muc/"+slug+"?sort="+sort+"&page="+page;
+        var pageType = $('#pageType').val();
+        if(pageType == 'productType'){
+            window.location.href = "/product/type/"+slug+"?sort="+sort+"&page="+page;
+        }else if(pageType == 'productDanhMuc'){
+            window.location.href = "/product/danh-muc/"+slug+"?sort="+sort+"&page="+page;
+        }else if(pageType == 'allProduct'){
+            window.location.href = "/shop/index/?sort="+sort+"&page="+page;
+        }
     }
 }

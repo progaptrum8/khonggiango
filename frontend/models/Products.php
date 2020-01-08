@@ -183,6 +183,86 @@ class Products extends \yii\db\ActiveRecord
         }
     }
 
+    public static function getProductsByType($slug, $limit, $sort, $offset){
+        try {
+            $orderBy = "";
+            if($sort == 'default'){
+                $orderBy = " pd.title ASC ";
+            }else if($sort == 'popularity'){
+                $orderBy = " pd.view DESC ";
+            }else if($sort == 'date'){
+                $orderBy = " pd.date_created DESC ";
+            }else if($sort == 'price'){
+                $orderBy = " pd.price ASC ";
+            }else if($sort == 'price-desc'){
+                $orderBy = " pd.price DESC ";
+            }
+            $sql = "
+                SELECT 
+                    pd.*,
+                    ds.name as nameDanhMuc,
+                    ds.slug as slugDanhMuc,
+                    pt.slug as slugProductType,
+                    pt.name as nameProductType
+                FROM products pd
+                INNER JOIN danhmuc_sanpham ds ON ds.id = pd.id_danhmuc
+                INNER JOIN product_types pt ON pt.id = pd.id_product_type
+                WHERE pt.slug = :slug
+                ORDER BY ".$orderBy."
+                LIMIT :limitdata OFFSET :offset
+            ";
+            $command = Yii::$app->db->createCommand($sql);
+            $command->bindValues([
+                ':slug' => $slug,
+                ':limitdata' => $limit != '' && $limit != null ? $limit : 100,
+                ':offset' => $offset
+            ]);
+            $data = $command->queryAll();
+            return $data;
+        } catch (Exception $e) {
+            return array();
+        }
+    }
+
+    public static function getAllProducts($limit, $sort, $offset){
+        try {
+            $orderBy = "";
+            if($sort == 'default'){
+                $orderBy = " pd.title ASC ";
+            }else if($sort == 'popularity'){
+                $orderBy = " pd.view DESC ";
+            }else if($sort == 'date'){
+                $orderBy = " pd.date_created DESC ";
+            }else if($sort == 'price'){
+                $orderBy = " pd.price ASC ";
+            }else if($sort == 'price-desc'){
+                $orderBy = " pd.price DESC ";
+            }
+            $sql = "
+                SELECT 
+                    pd.*,
+                    ds.name as nameDanhMuc,
+                    ds.slug as slugDanhMuc,
+                    pt.slug as slugProductType,
+                    pt.name as nameProductType
+                FROM products pd
+                INNER JOIN danhmuc_sanpham ds ON ds.id = pd.id_danhmuc
+                INNER JOIN product_types pt ON pt.id = pd.id_product_type
+                ORDER BY ".$orderBy."
+                LIMIT :limitdata OFFSET :offset
+            ";
+            $command = Yii::$app->db->createCommand($sql);
+            $command->bindValues([
+                ':limitdata' => $limit != '' && $limit != null ? $limit : 100,
+                ':offset' => $offset
+            ]);
+            $data = $command->queryAll();
+            return $data;
+        } catch (Exception $e) {
+            return array();
+        }
+    }
+
     public static function getTotalProductByDanhMuc($slug){
         try {
             $sql = "
@@ -192,6 +272,27 @@ class Products extends \yii\db\ActiveRecord
                 INNER JOIN danhmuc_sanpham ds ON ds.id = pd.id_danhmuc
                 INNER JOIN product_types pt ON pt.id = pd.id_product_type
                 WHERE ds.slug = :slug
+            ";
+            $command = Yii::$app->db->createCommand($sql);
+            $command->bindValues([
+                ':slug' => $slug
+            ]);
+            $data = $command->queryOne();
+            return $data;
+        } catch (Exception $e) {
+            return 0;
+        }
+    }
+
+    public static function getTotalProductByType($slug){
+        try {
+            $sql = "
+                SELECT 
+                    COUNT(*) as CNT
+                FROM products pd
+                INNER JOIN danhmuc_sanpham ds ON ds.id = pd.id_danhmuc
+                INNER JOIN product_types pt ON pt.id = pd.id_product_type
+                WHERE pt.slug = :slug
             ";
             $command = Yii::$app->db->createCommand($sql);
             $command->bindValues([

@@ -5,7 +5,7 @@ use yii\helpers\Url;
 		<div class="page-title-inner flex-row medium-flex-wrap container">
 		  	<div class="flex-col flex-grow medium-text-center">
 		  		<div class="is-small">
-					<nav class="woocommerce-breadcrumb breadcrumbs"><a href="/shop">Shop</a>
+					<nav class="woocommerce-breadcrumb breadcrumbs"><a href="/shop/index">Shop</a>
 						<span class="divider">/</span> 	
 						<a href="<?=Url::to(['product/product-of-danh-muc' , 'slug' => $dataProduct['slugDanhMuc'] ])?>"><?=$dataProduct['nameDanhMuc']?>
 						</a>
@@ -91,26 +91,20 @@ use yii\helpers\Url;
 				</div>
 				<div class="col large-9">
 					<div class="row">
-						<div class="large-6 col">
-							<div class="product-images relative mb-half has-hover woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 1;">
-								<figure class="woocommerce-product-gallery__wrapper product-gallery-slider slider slider-nav-small mb-half flickity-enabled" tabindex="0">
-									<div class="flickity-viewport" style="height: 323px; touch-action: pan-y;">
-										<div class="flickity-slider" style="left: 0px; transform: translateX(0%);">
-											<div class="woocommerce-product-gallery__image slide first is-selected" aria-selected="true" style="position: absolute; left: 0%;">
-												<a href="">
-													<img width="550" height="550" src="<?=$imagesProduct[0]['dirPath']?>" class="wp-post-image skip-lazy" alt="" title="<?=$dataProduct['title']?>" sizes="(max-width: 550px) 100vw, 550px">
-												</a>
-											</div>
-										</div>
-									</div><button class="flickity-button flickity-prev-next-button previous" type="button" disabled="" aria-label="Previous"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button><button class="flickity-button flickity-prev-next-button next" type="button" disabled="" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
-  								</figure>
-
-								<div class="image-tools absolute bottom left z-3">
-									<a class="hidden zoom-button button is-outline circle icon tooltip hide-for-small tooltipstered">
-										<i class="icon-expand"></i>
+						<div class="large-6 col mainSlick">
+							<div class="slider slider-for">
+								<?php foreach ($imagesProduct as $value){ ?>
+									<a href="<?php if($value["dirPath"] != "" && $value["dirPath"] != null){ echo $value["dirPath"]; } else { echo '/images/no-image.png'; } ?>" data-lightbox="roadtrip">
+										<img class="imgChoose" src="<?php if($value["dirPath"] != "" && $value["dirPath"] != null){ echo $value["dirPath"]; } else { echo '/images/no-image.png'; } ?>">
 									</a>
-								</div>
+								<?php } ?>
 							</div>
+							<div class="slider slider-nav">
+							    <?php foreach ($imagesProduct as $value){ ?>
+									<img class="imgSlide" src="<?php if($value["dirPath"] != "" && $value["dirPath"] != null){ echo $value["dirPath"]; } else { echo '/images/no-image.png'; } ?>">
+									
+								<?php } ?>
+						    </div>
 						</div>
 						<div class="product-info summary entry-summary col col-fit product-summary">
 							<h1 class="product-title product_title entry-title"><?=$dataProduct['title']?></h1>
@@ -402,5 +396,25 @@ use yii\helpers\Url;
 	    	$('#purchaseForm input').val("");
 			$('#purchaseForm textarea').val("");
 	  	});
+
+		$('.slider-for').slick({
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			arrows: false,
+			fade: true,
+			asNavFor: '.slider-nav'
+		});
+		$('.slider-nav').slick({
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			asNavFor: '.slider-for',
+			dots: true,
+			focusOnSelect: true
+		});
+
+		lightbox.option({
+	        'resizeDuration': 200,
+	        'wrapAround': true
+	    });
 	});
 </script>

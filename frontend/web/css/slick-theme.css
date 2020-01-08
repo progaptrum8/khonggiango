@@ -2,7 +2,7 @@
 /* Slider */
 .slick-loading .slick-list
 {
-    /* background: #fff url('./ajax-loader.gif') center center no-repeat; */
+    background: #fff url('./ajax-loader.gif') center center no-repeat;
 }
 
 /* Icons */
@@ -25,7 +25,7 @@
     position: absolute;
     top: 50%;
 
-    display: none!important;
+    display: block;
 
     width: 20px;
     height: 20px;
@@ -79,7 +79,9 @@
 
 .slick-prev
 {
-    left: -25px;
+    left: 0px;
+    background-color: #333d3e;
+    z-index: 9999;
 }
 [dir='rtl'] .slick-prev
 {
@@ -97,7 +99,9 @@
 
 .slick-next
 {
-    right: -25px;
+    right: 0px;
+    background-color: #333d3e;
+    z-index: 9999;
 }
 [dir='rtl'] .slick-next
 {
@@ -114,6 +118,11 @@
 }
 
 /* Dots */
+.slick-dotted.slick-slider
+{
+    margin-bottom: 30px;
+}
+
 .slick-dots
 {
     position: absolute;

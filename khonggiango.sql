@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 30/12/2019 00:13:20
+ Date: 09/01/2020 00:59:42
 */
 
 SET NAMES utf8mb4;
@@ -219,7 +219,7 @@ CREATE TABLE `configuration`  (
   `isSystem` tinyint(3) UNSIGNED NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `UQ__configur__DFD83CAF66603565`(`key`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for contact
@@ -244,7 +244,7 @@ CREATE TABLE `danhmuc_nguoiky`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for danhmuc_sanpham
@@ -271,6 +271,32 @@ INSERT INTO `danhmuc_sanpham` VALUES (13, 'Bàn ăn – Tủ quần áo', 'ban-a
 INSERT INTO `danhmuc_sanpham` VALUES (14, 'Tượng mỹ nghệ', 'tuong-my-nghe', NULL);
 INSERT INTO `danhmuc_sanpham` VALUES (15, 'Đặt hàng theo mẫu', 'dat-hang-theo-mau', NULL);
 INSERT INTO `danhmuc_sanpham` VALUES (16, 'Bàn ghế phòng khách', 'ban-ghe-phong-khach', NULL);
+
+-- ----------------------------
+-- Table structure for feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE `feedback`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NULL DEFAULT NULL,
+  `fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `comment` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `created_date` datetime(0) NULL DEFAULT NULL,
+  `status` tinyint(1) NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of feedback
+-- ----------------------------
+INSERT INTO `feedback` VALUES (2, 5, 'Nguyên', 'vonguyen191996@gmail.com', 'Sản phẩm tốt', '2020-01-02 10:01:23', 1);
+INSERT INTO `feedback` VALUES (3, 5, 'Tú', 'tuabc@gmai.com', 'Được!!', '2020-01-02 10:02:51', 1);
+INSERT INTO `feedback` VALUES (4, 5, 'Tâm', 'tamabc@gmail.com', 'Tạm tạm', '2020-01-02 10:03:08', 1);
+INSERT INTO `feedback` VALUES (5, 5, 'mặt loằn', 'mlabc@gmail.com', 'Như loằn', '2020-01-02 10:03:24', 1);
+INSERT INTO `feedback` VALUES (6, 5, 'fuck boy', 'fuckabv@gmail.com', 'fucking good', '2020-01-02 10:03:40', 1);
+INSERT INTO `feedback` VALUES (7, 5, 'heyboy', 'heyboy@gmail.com', 'hey hey', '2020-01-02 10:04:21', 1);
+INSERT INTO `feedback` VALUES (14, 8, '123123', '121212@gmail.com', '123123', '2020-01-09 12:21:18', 0);
 
 -- ----------------------------
 -- Table structure for guest_visit
@@ -519,6 +545,34 @@ INSERT INTO `migration` VALUES ('m000000_000000_base', 1501907343);
 INSERT INTO `migration` VALUES ('m140506_102106_rbac_init', 1501907347);
 
 -- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sex` tinyint(1) NULL DEFAULT 0,
+  `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `order_note` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `product_id` int(11) NULL DEFAULT NULL,
+  `ordered_date` datetime(0) NULL DEFAULT NULL,
+  `orderCode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `isHoanThanh` tinyint(1) NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (1, 'Võ Đăng Nguyên', 1, '0782112327', 'p123123@gmail.com', '123123123', '', 4, NULL, '#2020JanWed1', 0);
+INSERT INTO `orders` VALUES (2, '123123123', 0, '12312312312', '123123@gmail.com', '123123123', '123123', 0, NULL, '#202001012', 0);
+INSERT INTO `orders` VALUES (3, '312312', 1, '312312312312', '12312312@gmail.com', '3123123', '3123123', 4, NULL, '#202001013', 0);
+INSERT INTO `orders` VALUES (4, '12312', 1, '3123123123123', '12312312@gmail.com', '123123', '', 4, NULL, '#202001014', 0);
+INSERT INTO `orders` VALUES (5, '12312312', 0, '123123123', '12312@gmail.com', '12312312', '12312', 0, '2020-01-09 12:30:44', '#202001095', 0);
+
+-- ----------------------------
 -- Table structure for product_types
 -- ----------------------------
 DROP TABLE IF EXISTS `product_types`;
@@ -553,31 +607,33 @@ CREATE TABLE `products`  (
   `view` int(255) NULL DEFAULT 0,
   `date_created` datetime(0) NULL DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0 VNĐ',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `title`(`title`) USING BTREE,
   INDEX `id_danhmuc`(`id_danhmuc`) USING BTREE,
   INDEX `id_product_type`(`id_product_type`) USING BTREE,
   FULLTEXT INDEX `titleFullText`(`title`)
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (4, 'Salon gỗ đỏ tay 12 Chạm Nghê', 'Salon gỗ đỏ tay 12 Chạm Nghê', '/Upload/2f099ab4372577b3b52278e2c36ef351.jpg', 16, 3, 1, 0, '2019-12-27 17:21:10', 'salon-go-do-tay-12-cham-nghe');
-INSERT INTO `products` VALUES (5, 'Salon gỗ đỏ tay 12 Chạm Đào', 'Salon gỗ đỏ tay 12 Chạm Đào', '/Upload/57966b189e2c7e9ec54ce479a23f6e9a.jpg', 16, 3, 1, 0, '2019-12-27 17:16:37', 'salon-go-do-tay-12-cham-dao');
-INSERT INTO `products` VALUES (6, 'Salon gỗ đỏ tay 10 Chạm Đào', 'Salon gỗ đỏ tay 10 Chạm Đào', '/Upload/3b73c96908185907e68bb6362fa5539e.jpeg', 16, 3, 1, 0, '2019-12-27 17:24:00', 'salon-go-do-tay-10-cham-dao');
-INSERT INTO `products` VALUES (7, 'Salon gỗ đỏ Hoàng Gia', 'Salon gỗ đỏ Hoàng Gia', '/Upload/628bd762d28f6c8c4c49a4ab0416f86e.jpg', 16, 3, 1, 0, '2019-12-27 17:24:41', 'salon-go-do-hoang-gia');
-INSERT INTO `products` VALUES (8, 'Án gian tờ tổ gỗ cao cấp', 'Án gian tờ tổ gỗ cao cấp', '/Upload/e998bf8b817b59bbe609a765efbb88e1.jpg', 1, 4, 1, 0, '2019-12-27 17:25:20', 'an-gian-to-to-go-cao-cap');
-INSERT INTO `products` VALUES (9, 'Bàn thờ gia tiên khắc chữ vạn', 'Bàn thờ gia tiên khắc chữ vạn', '/Upload/b4c4e4b38ef6c39902aa7a4355e6d042.jpg', 1, 4, 1, 0, '2019-12-27 17:25:41', 'ban-tho-gia-tien-khac-chu-van');
-INSERT INTO `products` VALUES (10, 'Bàn thờ gia tiên mẫu mới hiện đại', 'Bàn thờ gia tiên mẫu mới hiện đại', '/Upload/0fa39ab5d34cff73ef73d3d740dbd4c1.jpg', 1, 4, 1, 0, '2019-12-27 17:26:07', 'ban-tho-gia-tien-mau-moi-hien-dai');
-INSERT INTO `products` VALUES (11, 'Bàn thờ kèm đôn mẫu đẹp', 'Bàn thờ kèm đôn mẫu đẹp', '/Upload/2276ca9cb427ccd4b303ae61d7c017c0.jpg', 1, 4, 1, 0, '2019-12-27 17:26:34', 'ban-tho-kem-don-mau-dep');
-INSERT INTO `products` VALUES (12, 'Mẫu bàn thờ hoa văn cổ', 'Mẫu bàn thờ hoa văn cổ', '/Upload/7c01a3437fbe6fdbab649ea603afda4b.jpg', 1, 4, 1, 0, '2019-12-27 17:26:57', 'mau-ban-tho-hoa-van-co');
-INSERT INTO `products` VALUES (13, 'Bàn ăn gỗ căm xe mặt gõ đỏ 6 ghế', 'Bàn ăn gỗ căm xe mặt gõ đỏ 6 ghế', '/Upload/d20e69f8d0a6b3d65ad2b642cc36e20d.jpg', 13, 5, 1, 0, '2019-12-27 17:27:32', 'ban-an-go-cam-xe-mat-go-do-6-ghe');
-INSERT INTO `products` VALUES (14, 'Bàn ăn gỗ sồi 1m8', 'Bàn ăn gỗ sồi 1m8', '/Upload/66e18d8d8f47771ff646029d66d9cf0a.jpg', 13, 5, 1, 0, '2019-12-27 17:27:48', 'ban-an-go-soi-1m8');
-INSERT INTO `products` VALUES (15, 'Bàn ăn gỗ sồi 4 ghế', 'Bàn ăn gỗ sồi 4 ghế', '/Upload/bd07cbe5d8f5f82c1bf8b3702073fd5d.jpg', 13, 5, 1, 0, '2019-12-27 17:28:16', 'ban-an-go-soi-4-ghe');
-INSERT INTO `products` VALUES (16, 'Kệ tivi gỗ đinh hương 1,6m', 'Kệ tivi gỗ đinh hương 1,6m', '/Upload/4ff6d236b744df135015dff447b41c93.jpg', 6, 6, 1, 0, '2019-12-27 17:28:54', 'ke-tivi-go-dinh-huong-16m');
-INSERT INTO `products` VALUES (17, 'Kệ tivi gỗ đinh hương 1,8m', 'Kệ tivi gỗ đinh hương 1,8m', '/Upload/642ed0f33bbe25102ec8f5e4856ae448.jpg', 6, 6, 1, 0, '2019-12-27 17:29:24', 'ke-tivi-go-dinh-huong-18m');
-INSERT INTO `products` VALUES (18, 'Kệ tivi gỗ cẩm 2,2m', 'Kệ tivi gỗ cẩm 2,2m', '/Upload/c7e441ebc312321430f5d894024cae1e.jpg', 6, 6, 1, 0, '2019-12-27 17:29:41', 'ke-tivi-go-cam-22m');
+INSERT INTO `products` VALUES (4, 'Salon gỗ đỏ tay 12 Chạm Nghê', 'Salon gỗ đỏ tay 12 Chạm Nghê', '/Upload/2f099ab4372577b3b52278e2c36ef351.jpg', 16, 3, 1, 9, '2020-01-01 11:55:49', 'salon-go-do-tay-12-cham-nghe', '15,100,000VNĐ');
+INSERT INTO `products` VALUES (5, 'Salon gỗ đỏ tay 12 Chạm Đào', 'Salon gỗ đỏ tay 12 Chạm Đào', '/Upload/57966b189e2c7e9ec54ce479a23f6e9a.jpg', 16, 3, 1, 2, '2019-12-27 17:16:37', 'salon-go-do-tay-12-cham-dao', '0 VNĐ');
+INSERT INTO `products` VALUES (6, 'Salon gỗ đỏ tay 10 Chạm Đào', 'Salon gỗ đỏ tay 10 Chạm Đào', '/Upload/3b73c96908185907e68bb6362fa5539e.jpeg', 16, 3, 1, 0, '2019-12-27 17:24:00', 'salon-go-do-tay-10-cham-dao', '0 VNĐ');
+INSERT INTO `products` VALUES (7, 'Salon gỗ đỏ Hoàng Gia', 'Salon gỗ đỏ Hoàng Gia', '/Upload/628bd762d28f6c8c4c49a4ab0416f86e.jpg', 16, 3, 1, 7, '2019-12-27 17:24:41', 'salon-go-do-hoang-gia', '0 VNĐ');
+INSERT INTO `products` VALUES (8, 'Án gian tờ tổ gỗ cao cấp', 'Án gian tờ tổ gỗ cao cấp', '/Upload/e998bf8b817b59bbe609a765efbb88e1.jpg', 1, 4, 1, 2, '2019-12-27 17:25:20', 'an-gian-to-to-go-cao-cap', '0 VNĐ');
+INSERT INTO `products` VALUES (9, 'Bàn thờ gia tiên khắc chữ vạn', 'Bàn thờ gia tiên khắc chữ vạn', '/Upload/b4c4e4b38ef6c39902aa7a4355e6d042.jpg', 1, 4, 1, 3, '2019-12-27 17:25:41', 'ban-tho-gia-tien-khac-chu-van', '0 VNĐ');
+INSERT INTO `products` VALUES (10, 'Bàn thờ gia tiên mẫu mới hiện đại', 'Bàn thờ gia tiên mẫu mới hiện đại', '/Upload/0fa39ab5d34cff73ef73d3d740dbd4c1.jpg', 1, 4, 1, 1, '2019-12-27 17:26:07', 'ban-tho-gia-tien-mau-moi-hien-dai', '0 VNĐ');
+INSERT INTO `products` VALUES (11, 'Bàn thờ kèm đôn mẫu đẹp', 'Bàn thờ kèm đôn mẫu đẹp', '/Upload/2276ca9cb427ccd4b303ae61d7c017c0.jpg', 1, 4, 1, 0, '2019-12-27 17:26:34', 'ban-tho-kem-don-mau-dep', '0 VNĐ');
+INSERT INTO `products` VALUES (12, 'Mẫu bàn thờ hoa văn cổ', 'Mẫu bàn thờ hoa văn cổ', '/Upload/7c01a3437fbe6fdbab649ea603afda4b.jpg', 1, 4, 1, 1, '2019-12-27 17:26:57', 'mau-ban-tho-hoa-van-co', '0 VNĐ');
+INSERT INTO `products` VALUES (13, 'Bàn ăn gỗ căm xe mặt gõ đỏ 6 ghế', 'Bàn ăn gỗ căm xe mặt gõ đỏ 6 ghế', '/Upload/d20e69f8d0a6b3d65ad2b642cc36e20d.jpg', 13, 5, 1, 1, '2019-12-27 17:27:32', 'ban-an-go-cam-xe-mat-go-do-6-ghe', '0 VNĐ');
+INSERT INTO `products` VALUES (14, 'Bàn ăn gỗ sồi 1m8', 'Bàn ăn gỗ sồi 1m8', '/Upload/66e18d8d8f47771ff646029d66d9cf0a.jpg', 13, 5, 1, 0, '2019-12-27 17:27:48', 'ban-an-go-soi-1m8', '0 VNĐ');
+INSERT INTO `products` VALUES (15, 'Bàn ăn gỗ sồi 4 ghế', 'Bàn ăn gỗ sồi 4 ghế', '/Upload/bd07cbe5d8f5f82c1bf8b3702073fd5d.jpg', 13, 5, 1, 0, '2019-12-27 17:28:16', 'ban-an-go-soi-4-ghe', '0 VNĐ');
+INSERT INTO `products` VALUES (16, 'Kệ tivi gỗ đinh hương 1,6m', 'Kệ tivi gỗ đinh hương 1,6m', '/Upload/4ff6d236b744df135015dff447b41c93.jpg', 6, 6, 1, 0, '2019-12-27 17:28:54', 'ke-tivi-go-dinh-huong-16m', '0 VNĐ');
+INSERT INTO `products` VALUES (17, 'Kệ tivi gỗ đinh hương 1,8m', 'Kệ tivi gỗ đinh hương 1,8m', '/Upload/642ed0f33bbe25102ec8f5e4856ae448.jpg', 6, 6, 1, 0, '2019-12-27 17:29:24', 'ke-tivi-go-dinh-huong-18m', '0 VNĐ');
+INSERT INTO `products` VALUES (18, 'Kệ tivi gỗ cẩm 2,2m', 'Kệ tivi gỗ cẩm 2,2m', '/Upload/c7e441ebc312321430f5d894024cae1e.jpg', 6, 6, 1, 0, '2019-12-27 17:29:41', 'ke-tivi-go-cam-22m', '0 VNĐ');
+INSERT INTO `products` VALUES (20, 'Test', 'test', '/Upload/4942141-6602700762-yasuo.jpg', 16, 3, 1, 20, '2020-01-07 17:02:04', '123123', '15,000,000VNĐ');
 
 -- ----------------------------
 -- Table structure for promotion
@@ -630,6 +686,12 @@ INSERT INTO `ql_filedinhkem` VALUES (45, NULL, 15, '115db702449d5e492d7691bdcaa8
 INSERT INTO `ql_filedinhkem` VALUES (46, NULL, 16, 'cdf4ff868eec6957e4481acf75473905.jpg', 'ke-tivi-go-dinh-huong-1m6-2-800x800.jpg', 'image/jpeg', NULL, '/Upload/cdf4ff868eec6957e4481acf75473905.jpg', NULL, 0);
 INSERT INTO `ql_filedinhkem` VALUES (47, NULL, 17, '112e6ea885bc25011aa583be3ee49b85.jpg', 'ke-ti-vi-dinh-huong-11-800x800.jpg', 'image/jpeg', NULL, '/Upload/112e6ea885bc25011aa583be3ee49b85.jpg', NULL, 0);
 INSERT INTO `ql_filedinhkem` VALUES (48, NULL, 18, '6986a964e7db83a4cbdc8e25c4b28ea9.jpg', 'ke-tivi-go-cam-22m-tv034-.jpg', 'image/jpeg', NULL, '/Upload/6986a964e7db83a4cbdc8e25c4b28ea9.jpg', NULL, 0);
+INSERT INTO `ql_filedinhkem` VALUES (49, NULL, 20, NULL, '13534511_1773837622831771_566184885_n.jpg', 'image/jpeg', NULL, '/Upload/13534511_1773837622831771_566184885_n.jpg', NULL, 0);
+INSERT INTO `ql_filedinhkem` VALUES (50, NULL, 20, NULL, '13551620_546757368859474_1938719913_n.jpg', 'image/jpeg', NULL, '/Upload/13551620_546757368859474_1938719913_n.jpg', NULL, 0);
+INSERT INTO `ql_filedinhkem` VALUES (51, NULL, 20, NULL, '13573460_1763706290575296_1657282168_n.jpg', 'image/jpeg', NULL, '/Upload/13573460_1763706290575296_1657282168_n.jpg', NULL, 0);
+INSERT INTO `ql_filedinhkem` VALUES (52, NULL, 20, NULL, '13597687_1555288314779256_1389654015_n.jpg', 'image/jpeg', NULL, '/Upload/13597687_1555288314779256_1389654015_n.jpg', NULL, 0);
+INSERT INTO `ql_filedinhkem` VALUES (53, NULL, 20, NULL, '13627909_278577929176513_1984302453_n.jpg', 'image/jpeg', NULL, '/Upload/13627909_278577929176513_1984302453_n.jpg', NULL, 0);
+INSERT INTO `ql_filedinhkem` VALUES (54, NULL, 20, NULL, '13643138_1764659597152786_1994072682_n.jpg', 'image/jpeg', NULL, '/Upload/13643138_1764659597152786_1994072682_n.jpg', NULL, 0);
 
 -- ----------------------------
 -- Table structure for user

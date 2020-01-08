@@ -52,7 +52,7 @@ class ProductController extends Controller
 				$dataProduct = Products::getInfoProduct($slug);
 				if(count($dataProduct) > 0){
 					$getSameProducts = Products::getSameProducts($dataProduct);
-					$imagesProduct = QlFiledinhkem::find()->where(['idObject' => $dataProduct['id']])->all();
+					$imagesProduct = QlFiledinhkem::find()->where(['idObject' => $dataProduct['id']])->asArray()->all();
 					$danhMucSP = DanhMucSanPham::find()->asArray()->all();
 					$getFeedback = Feedback::getFeedback($dataProduct['id']);
 					$getPreviousProduct = Products::getPreviousProduct($dataProduct);
@@ -99,7 +99,7 @@ class ProductController extends Controller
 			}
 			$dataProducts = Products::getProductsByDanhMuc($slug, $limit, $sort, $offset);
 			$totalProducts = Products::getTotalProductByDanhMuc($slug);
-			$danhMucSP = DanhMucSanPham::find()->all();
+			$danhMucSP = DanhMucSanPham::find()->asArray()->all();
 			$totalProducts = $totalProducts['CNT'];
 			if(count($dataProducts) > 0){
 				$nameDanhMuc = $dataProducts[0]['nameDanhMuc'];
@@ -107,13 +107,21 @@ class ProductController extends Controller
 				return $this->render('products-of-danhmuc', [
 					'dataProducts' => $dataProducts,
 					'pages' => $pages,
-					'pageSize' => $pageSize,
-					'slugProductType' => $slug,
+					'slugPage' => $slug,
 					'nameDanhMuc' => $nameDanhMuc,
-					'danhMucSP' => $danhMucSP
+					'danhMucSP' => $danhMucSP,
+					'sort' => $sort
 				]);
 			}else{
-				throw new \yii\web\NotFoundHttpException("No products found!");
+				$pages = new Pagination(['totalCount' => 0, 'pageSize' => $limit]);
+				return $this->render('products-of-danhmuc', [
+					'dataProducts' => $dataProducts,
+					'pages' => $pages,
+					'slugPage' => $slug,
+					'nameDanhMuc' => $nameDanhMuc,
+					'danhMucSP' => $danhMucSP,
+					'sort' => $sort
+				]);
 			}
 		} catch (Exception $e) {
 			throw new \yii\web\NotFoundHttpException("No products found!");
@@ -122,11 +130,47 @@ class ProductController extends Controller
 
 	public function actionProductOfType(){
 		try {
-			echo 'chua code'; exit;
 			$requests = Yii::$app->request->get();
 			$slug = $requests["slug"];
+			$sort = $requests["sort"];
+			$limit = CommonConst::LIMIT_LOAD_PRODUCT;
+			$nameProductType ="";
+			$page = Yii::$app->request->get("page");
+			if($page == '' || $page == null){
+				$page = 1;
+			}
+			$offset = ($page-1)*$limit;
+			if($sort == '' || $sort == null){
+				$sort = 'default';
+			}
+			$dataProducts = Products::getProductsByType($slug, $limit, $sort, $offset);
+			$totalProducts = Products::getTotalProductByType($slug);
+			$danhMucSP = DanhMucSanPham::find()->asArray()->all();
+			$totalProducts = $totalProducts['CNT'];
+			if(count($dataProducts) > 0){
+				$nameProductType = $dataProducts[0]['nameProductType'];
+				$pages = new Pagination(['totalCount' => $totalProducts, 'pageSize' => $limit]);
+				return $this->render('products-of-type', [
+					'dataProducts' => $dataProducts,
+					'pages' => $pages,
+					'slugPage' => $slug,
+					'nameProductType' => $nameProductType,
+					'danhMucSP' => $danhMucSP,
+					'sort' => $sort
+				]);
+			}else{
+				$pages = new Pagination(['totalCount' => 0, 'pageSize' => $limit]);
+				return $this->render('products-of-type', [
+					'dataProducts' => $dataProducts,
+					'pages' => $pages,
+					'slugPage' => $slug,
+					'nameProductType' => $nameProductType,
+					'danhMucSP' => $danhMucSP,
+					'sort' => $sort
+				]);
+			}
 		} catch (Exception $e) {
-			
+			throw new \yii\web\NotFoundHttpException("No products found!");
 		}
 	}
 }
