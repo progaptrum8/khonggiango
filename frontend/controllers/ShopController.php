@@ -20,6 +20,7 @@ class ShopController extends Controller
 	}
 	public function actionIndex(){
 		try {
+			$this->view->title = "Shop";
 			$requests = Yii::$app->request->get();
 			$sort = $requests["sort"];
 			$limit = CommonConst::LIMIT_LOAD_PRODUCT;

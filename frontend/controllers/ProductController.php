@@ -48,9 +48,11 @@ class ProductController extends Controller
 		try {
 			$requests = Yii::$app->request->get();
 			$slug = $requests["slug"];
+			$this->view->title = "Không tìm thấy sản phẩm!";
 			if($slug != '' && $slug != null){
 				$dataProduct = Products::getInfoProduct($slug);
 				if(count($dataProduct) > 0){
+					$this->view->title = $dataProduct['title'];
 					$getSameProducts = Products::getSameProducts($dataProduct);
 					$imagesProduct = QlFiledinhkem::find()->where(['idObject' => $dataProduct['id']])->asArray()->all();
 					$danhMucSP = DanhMucSanPham::find()->asArray()->all();
@@ -84,6 +86,7 @@ class ProductController extends Controller
 
 	public function actionProductOfDanhMuc(){
 		try {
+			$this->view->title = "Không tìm thấy sản phẩm!";
 			$requests = Yii::$app->request->get();
 			$slug = $requests["slug"];
 			$sort = $requests["sort"];
@@ -102,6 +105,7 @@ class ProductController extends Controller
 			$danhMucSP = DanhMucSanPham::find()->asArray()->all();
 			$totalProducts = $totalProducts['CNT'];
 			if(count($dataProducts) > 0){
+				$this->view->title = $dataProducts[0]['nameDanhMuc'];
 				$nameDanhMuc = $dataProducts[0]['nameDanhMuc'];
 				$pages = new Pagination(['totalCount' => $totalProducts, 'pageSize' => $limit]);
 				return $this->render('products-of-danhmuc', [
@@ -130,6 +134,7 @@ class ProductController extends Controller
 
 	public function actionProductOfType(){
 		try {
+			$this->view->title = "Không tìm thấy sản phẩm!";
 			$requests = Yii::$app->request->get();
 			$slug = $requests["slug"];
 			$sort = $requests["sort"];
@@ -148,6 +153,7 @@ class ProductController extends Controller
 			$danhMucSP = DanhMucSanPham::find()->asArray()->all();
 			$totalProducts = $totalProducts['CNT'];
 			if(count($dataProducts) > 0){
+				$this->view->title = $dataProducts[0]['nameProductType'];
 				$nameProductType = $dataProducts[0]['nameProductType'];
 				$pages = new Pagination(['totalCount' => $totalProducts, 'pageSize' => $limit]);
 				return $this->render('products-of-type', [

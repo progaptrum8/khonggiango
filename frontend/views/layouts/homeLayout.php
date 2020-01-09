@@ -35,108 +35,30 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<header id="header" class="header has-sticky sticky-jump" style="">
+			<header id="header" class="header has-sticky sticky-jump">
 				<div class="header-wrapper">
-					<div id="masthead" class="header-main hide-for-sticky">
-						<div class="header-inner flex-row container logo-left medium-logo-center" role="navigation">
-
-							<!-- Logo -->
-							<div id="logo" class="flex-col logo">
-								<!-- Header logo -->
-								<a href="http://khonggiango.com/" title="Không Gian Gỗ" rel="home">
-									<img width="267" height="366" src="http://khonggiango.com/wp-content/uploads/2019/03/4.png" class="header_logo header-logo" alt="Không Gian Gỗ">
-									<img width="267" height="366" src="http://khonggiango.com/wp-content/uploads/2019/03/4.png" class="header-logo-dark" alt="Không Gian Gỗ">
-								</a>
-							</div>
-
-								<!-- Mobile Left Elements -->
-							<div class="flex-col show-for-medium flex-left">
-								<ul class="mobile-nav nav nav-left ">
-									<li class="nav-icon has-icon">
-										<div class="header-button">
-											<a href="#" data-open="#main-menu" data-pos="left" data-bg="main-menu-overlay" data-color="" class="icon primary button round is-small" aria-controls="main-menu" aria-expanded="false">
-
-												<i class="icon-menu"></i>
-											</a>
-										</div> 
-									</li>            
-								</ul>
-							</div>
-
-								<!-- Left Elements -->
-							<div class="flex-col hide-for-medium flex-left
-								flex-grow">
-								<ul class="header-nav header-nav-main nav nav-left  nav-size-medium nav-uppercase">
-								</ul>
-							</div>
-
-								<!-- Right Elements -->
-							<div class="flex-col hide-for-medium flex-right">
-								<ul class="header-nav header-nav-main nav nav-right  nav-size-medium nav-uppercase">
-								</ul>
-							</div>
-
-								<!-- Mobile Right Elements -->
-							<div class="flex-col show-for-medium flex-right">
-								<ul class="mobile-nav nav nav-right ">
-									<li class="cart-item has-icon">
-
-										<div class="header-button">      
-											<a href="http://khonggiango.com" class="header-cart-link off-canvas-toggle nav-top-link icon primary button circle is-small" data-open="#cart-popup" data-class="off-canvas-cart" title="Giỏ hàng" data-pos="right">
-
-												<i class="icon-shopping-cart" data-icon-label="0">
-												</i>
-											</a>
-										</div>
-
-									<!-- Cart Sidebar Popup -->
-										<div id="cart-popup" class="mfp-hide widget_shopping_cart">
-											<div class="cart-popup-inner inner-padding">
-												<div class="cart-popup-title text-center">
-													<h4 class="uppercase">Giỏ hàng</h4>
-													<div class="is-divider"></div>
-												</div>
-												<div class="widget_shopping_cart_content">
-													<p class="woocommerce-mini-cart__empty-message">Chưa có sản phẩm trong giỏ hàng.</p>
-												</div>
-												<div class="cart-sidebar-content relative"></div>
-											</div>
-										</div>
-
-									</li>
-								</ul>
-							</div>
-
-						</div><!-- .header-inner -->
-
-						<!-- Header divider -->
-						<div class="container">
-							<div class="top-divider full-width"></div>
+					<img class="img-theme" src="/images/background-main.png">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
 						</div>
-						<!-- .header-main -->
-
-						<div id="wide-nav" class="header-bottom wide-nav nav-dark hide-for-medium">
-							<div class="flex-row container">
-								<div class="flex-col hide-for-medium flex-left">
-									<ul class="nav header-nav header-bottom-nav nav-left  nav-divided nav-size-xlarge nav-spacing-xlarge nav-uppercase">
-										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-74 current_page_item active  menu-item-363">
-											<a href="/" class="nav-top-link"><i class="fas fa-home whiteColor" aria-hidden="true"></i>Trang Chủ</a>
-										</li>
-										<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/site/about" class="nav-top-link">Giới thiệu</a></li>
-										<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/site/promotion" class="nav-top-link">Ưu đãi</a></li>
-										<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/site/cash" class="nav-top-link">THANH TOÁN MUA HÀNG</a></li>
-										<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/site/contact" class="nav-top-link">LIÊN HỆ</a></li>
-									</ul>
-								</div><!-- flex-col -->
-								<div class="flex-col hide-for-medium flex-right flex-grow">
-									<ul class="nav header-nav header-bottom-nav nav-right  nav-divided nav-size-xlarge nav-spacing-xlarge nav-uppercase">
-									</ul>
-								</div><!-- flex-col -->
-							</div><!-- .flex-row -->
-						</div><!-- .header-bottom -->
-
-						<div class="header-bg-container fill"><div class="header-bg-image fill"></div><div class="header-bg-color fill"></div></div><!-- .header-bg-container -->   </div><!-- header-wrapper-->
-					</header>
+						<div class="collapse navbar-collapse" id="collapse" style="background-color: #9c5d20;">
+							<ul class="nav header-nav header-bottom-nav nav-left  nav-divided nav-size-xlarge nav-spacing-xlarge nav-uppercase">
+								<li><a href="/" class="nav-top-link"><i class="fas fa-home whiteColor" aria-hidden="true"></i>Trang Chủ</a></li>
+								<li><a href="/site/about" class="nav-top-link">Giới thiệu</a></li>
+								<li><a href="/site/promotion" class="nav-top-link">Ưu đãi</a></li>
+								<li><a href="/site/cash" class="nav-top-link">THANH TOÁN MUA HÀNG</a></li>
+								<li><a href="/site/contact" class="nav-top-link">LIÊN HỆ</a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</header>
 			<div class="content-body">
 				<?=$content?>
 			</div>

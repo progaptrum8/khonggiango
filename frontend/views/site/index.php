@@ -4,7 +4,7 @@ use yii\helpers\Url;
 <div id="content" class="content-area">
 	<div class="gap-element homeProduct">
 		<div class="row">
-			<div class="col hide-for-medium medium-3 small-12 large-3">
+			<div class="col-xs-12 col-sm-3 col-md-3">
 				<div class="col-inner">
 					<div id="secondary" class="widget-area " role="complementary">
 						<aside id="nav_menu-2" class="widget widget_nav_menu">
@@ -48,7 +48,7 @@ use yii\helpers\Url;
 					</div>
 				</div>
 			</div>
-			<div class="col list-product-home medium-9 small-12 large-9">
+			<div class="col-xs-12 col-sm-9 col-md-9">
 				<div class="col-inner">
 					<?php foreach ($loaiSP as  $value){ ?>
 						<div class="boxHomeContainer">
@@ -57,12 +57,12 @@ use yii\helpers\Url;
 								<h3 class="section-title section-title-center"><b></b><span class="section-title-main">sẢN PHẨM NỔI BẬT</span><b></b>
 								</h3>
 							</div>
-							<div class="row large-columns-3 medium-columns- small-columns-2 row-small has-shadow row-box-shadow-1 row-box-shadow-2-hover">
+							<div class="row">
 								<?php foreach ($data as $key => $product){ ?>
 									<?php if($product['id_product_type'] == $value['id']){ ?>
-										<div class="col">
+										<div class="col-md-4 col-sm-4 col-xs-6">
 											<div class="col-inner">
-												<div class="col-xs-6 product-small box has-hover box-normal box-text-bottom">
+												<div class="product-small box has-hover box-normal box-text-bottom">
 													<div class="box-image">
 														<div class="image-cover">
 															<a href="<?=Url::to(['product/detail-product','slug' => $product['slug']])?>">
@@ -97,7 +97,7 @@ use yii\helpers\Url;
 		<section class="section">
 			<div class="bg section-bg fill bg-fill  bg-loaded">
 			</div>
-			<div class="section-content relative">
+			<div class="section-content relative animation-element slide-left testimonial">
 				<div class="row" id="row-1895157275">
 					<div class="col small-12 large-12" data-animate="fadeInUp" data-animated="true"><div class="col-inner">
 						<div class="container section-title-container"><h3 class="section-title section-title-normal"><b></b><span class="section-title-main" style="font-size:160%;color:rgb(255, 255, 255);">PHƯƠNG CHÂM</span><b></b></h3></div><!-- .section-title -->
@@ -207,3 +207,45 @@ use yii\helpers\Url;
 		</section>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+  //window and animation items
+  var animation_elements = $.find('.animation-element');
+  var web_window = $(window);
+
+  //check to see if any animation containers are currently in view
+  function check_if_in_view() {
+    //get current window information
+    var window_height = web_window.height();
+    var window_top_position = web_window.scrollTop();
+    var window_bottom_position = (window_top_position + window_height);
+
+    //iterate through elements to see if its in view
+    $.each(animation_elements, function() {
+
+      //get the element sinformation
+      var element = $(this);
+      var element_height = $(element).outerHeight();
+      var element_top_position = $(element).offset().top;
+      var element_bottom_position = (element_top_position + element_height);
+
+      //check to see if this current container is visible (its viewable if it exists between the viewable space of the viewport)
+      if ((element_bottom_position >= window_top_position) && (element_top_position <= window_bottom_position)) {
+        element.addClass('in-view');
+      } else {
+        element.removeClass('in-view');
+      }
+    });
+
+  }
+
+  //on or scroll, detect elements in view
+  $(window).on('scroll resize', function() {
+      check_if_in_view()
+    })
+    //trigger our scroll event on initial load
+  $(window).trigger('scroll');
+
+});
+</script>

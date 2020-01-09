@@ -1,14 +1,9 @@
-<div class="header">
-    <ul class="menu-header">
-        <li class="mh-btns-left">
-            <a class="zmdi zmdi-chevron-left zmdi-hc-fw font-30" onclick="signup.goBack();"></a>
-        </li>
-        <li class="mh-btns-center">Terms And Privacy</li>
-        <li class="mh-btns-right"></li>
-    </ul>
-</div>
-<div class="content-body content">
-    <div class="row-setting">
-        This is the content of Terms And Privacy
-    </div>
+<div id="content" class="content-area page-wrapper" role="main">
+    <div class="row row-main">
+        <div class="large-12 col">
+            <div class="col-inner">
+                <?=base64_decode($content)?>
+            </div>
+        </div><!-- .large-12 -->
+    </div><!-- .row -->
 </div>
