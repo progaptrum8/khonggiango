@@ -166,8 +166,8 @@ use yii\helpers\Url;
 													<div class="row commentBox">
 														<div class="col-md-12 col-xs-12">
 															<section class="comment-list">
-																<article class="row">
-																	<div class="boxAvatar hidden-xs"">
+																<article class="col-xs-12 pd0">
+																	<div class="boxAvatar pull-left hidden-xs">
 																		<figure class="avatarCustomer">
 																			<img class="img-responsive" src="/images/user.png" />
 																		</figure>
@@ -248,7 +248,7 @@ use yii\helpers\Url;
 							</div>
 						</div>
 						<div class="row">
-							<h3 class="product-section-title container-width product-section-title-related pt-half pb-half uppercase">Sản phẩm tương tự</h3>
+							<h3 class="col-xs-12 product-section-title container-width product-section-title-related pt-half pb-half uppercase">Sản phẩm tương tự</h3>
 							<?php if(count($sameProducts) > 3){ ?>
 								<div class="col-xs-12 mgBot10">
 									<a class="pull-right see-more" href="<?=Url::to(['product/product-of-type','slug' => $dataProduct['slugProductType']])?>">Xem thêm</a>

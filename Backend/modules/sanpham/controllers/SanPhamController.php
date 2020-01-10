@@ -121,9 +121,7 @@ class SanPhamController extends BaseController {
                 $mime = "";
                 $dataResize = [];
                 $dataFiles = $_FILES['files'];
-                var_dump($_FILES); exit;
                 if($_FILES['thumbnail']['size'] > 0) { // save thumbnail image
-                    echo 123; exit;
                     $dataResize = QlFiledinhkem::getDataFileAfterResize($_FILES['thumbnail']);
                 }
                 if(count($dataResize) > 0){

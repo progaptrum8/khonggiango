@@ -45,13 +45,13 @@ aside.widget .widget-title:before {
     background-repeat: no-repeat;
 }
 
-.list-product-home .row-small>.col>.col-inner {
+.col-custom .col-inner {
     border: 1px solid #dcdcdc;
     border-radius: 3px;
     padding: 5px 5px;
     background: white;
 }
-.list-product-home .row-small>.col>.col-inner {
+.col-custom .col-inner {
     min-height: 242px;
 }
 .product-small.box.has-hover.box-normal.box-text-bottom .box-image {
@@ -605,10 +605,6 @@ div.textwidget
     color: #ffffff;
     font-weight: normal;
 }
-.pull-left {
-    float: left!important;
-    margin-left: 10px !important;
-}
 .fa {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -1071,4 +1067,9 @@ th, td {
         margin-bottom: 5px;
     }
 
+}
+.col-custom{
+    padding: 0 9.8px 19.6px !important;
+    margin-bottom: 0;
+    margin-top: 20px;
 }

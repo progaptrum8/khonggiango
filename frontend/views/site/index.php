@@ -57,10 +57,10 @@ use yii\helpers\Url;
 								<h3 class="section-title section-title-center"><b></b><span class="section-title-main">sẢN PHẨM NỔI BẬT</span><b></b>
 								</h3>
 							</div>
-							<div class="row">
+							<div class="row row-small has-shadow row-box-shadow-1 row-box-shadow-2-hover">
 								<?php foreach ($data as $key => $product){ ?>
 									<?php if($product['id_product_type'] == $value['id']){ ?>
-										<div class="col-md-4 col-sm-4 col-xs-6">
+										<div class="col-custom col-md-4 col-sm-4 col-xs-6 ">
 											<div class="col-inner">
 												<div class="product-small box has-hover box-normal box-text-bottom">
 													<div class="box-image">
@@ -107,7 +107,7 @@ use yii\helpers\Url;
 							<p><span style="font-size: 140%;">Đến với chúng tôi, quý khách sẽ nhận được sự tư vấn tận tình từ các nhân viên có kinh nghiệm. Mọi thắc khi mua hàng hoặc mắc trao đổi về sản phẩm xin vui lòng gọi đến số Hotline:&nbsp;<b>0935 987 356 – 0777 248 567 .&nbsp;</b>Chúng tôi&nbsp;sẽ giải đáp trong thời gian sớm nhất.</span></p>
 							<p><span style="font-size: 140%;">Xin chân thành cảm ơn!</span></p>
 							<div>
-								<div><img src="https://sites.google.com/site/ctykhanggiaphat/_/rsrc/1498119063487/home/gt.png" border="0"></div>
+								<div><img src="" border="0"></div>
 								<div></div>
 								<div><span style="font-size: 140%;"><span style="color: #555555;">&nbsp;Dựa trên nền tảng&nbsp;</span><b style="color: #555555;">“Uy tín – Chuyên nghiệp – Hiệu quả”</b></span></div>
 								<div>
