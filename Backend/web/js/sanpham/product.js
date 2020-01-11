@@ -1,8 +1,3 @@
-/*
- * Quản lý cơ quan
- * @author: MauBV
- * @date:   2017/07/07
- */
 var danhMucSPByElement = {
     pageSize: "#pageSize",
     searchForm: "#searchForm",
@@ -10,9 +5,11 @@ var danhMucSPByElement = {
     isActiveClick: ".kickHoat",
     deleteByButtonClick: "#deleteDanhMucSP",
     deleteLoaiSPButtonClick: "#deleteLoaiSP",
+    deleteFeedbackClick: "#deleteFeedBack",
     selectItemCheckboxAll: "#selectedAll",
     selectItemCheckboxName: "selected[]",
-    formSanPham: "#formSanPham"
+    formSanPham: "#formSanPham",
+    formFeedback: "#formFeedback",
 };
 
 var sanPhamByEvent = {
@@ -22,6 +19,7 @@ var sanPhamByEvent = {
         this.toogleSelectCheckBoxClick();
         this.deleteLoaiSPButtonClick();
         this.validationForm();
+        this.deleteFeedbackClick();
     },
     deleteByButtonClick: function () {
         $(danhMucSPByElement.deleteByButtonClick).on("click", function () {
@@ -63,6 +61,26 @@ var sanPhamByEvent = {
             }
         });
     },
+    deleteFeedbackClick: function () {
+        $(danhMucSPByElement.deleteFeedbackClick).on("click", function () {
+            var idSelected = $('div.listFeedback input[name="selected[]"]').map(function () {
+                return this.checked ? this.value : null;
+            }).get();
+            if (idSelected.toString() === ""){
+                alert('Vui lòng chọn Sản phẩm cần xoá!');
+            } else {
+                if (confirm("Bạn có chắc muốn xóa?")) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/sanpham/feedback/delete",
+                        data: exactDataAjax({idSelected: idSelected}),
+                        async: false,
+                        cache: false
+                    });
+                }
+            }
+        });
+    },
     toogleSelectCheckBoxClick: function () {
         $(danhMucSPByElement.selectItemCheckboxAll).on("click", function () {
             checkboxes = document.getElementsByName(danhMucSPByElement.selectItemCheckboxName);
@@ -88,6 +106,23 @@ var sanPhamByEvent = {
                 describe: {required: "Không thể bỏ trống"},
             }
         });
+        $(danhMucSPByElement.formFeedback).validate({
+            rules: {
+                fullname: {
+                    required: true,
+                    maxlength:50
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                commment: {
+                    required: true,
+                    maxlength: 255
+                }
+            }
+        });
+        
     },
 
     handleBrowseImage: function () {
@@ -208,8 +243,25 @@ var sanPhamByEvent = {
         var n = number.split('').reverse().join("");
         var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");    
         return  n2.split('').reverse().join('') + 'VNĐ';
-    }
+    },
+    changeStatus: function(feedbackId){
+        var value = 0;
 
+        if ($('.isPublicComment').is(":checked"))
+        {
+            value = 1;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/sanpham/feedback/change-status",
+            data: {
+                value : value,
+                feedbackId : feedbackId
+            },
+            async: false,
+            cache: false
+        });
+    },
 };
 
 

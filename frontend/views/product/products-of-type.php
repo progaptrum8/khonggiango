@@ -4,7 +4,7 @@ use app\components\CustomPagination;
 ?>
 <div class="headerPage">
 	<div class="row">
-		<div class="col-sm-6 col-md-6 leftHeaderPage">
+		<div class="col-xs-12 col-sm-6 col-md-6">
 			<div class="is-small mgTop10">
 				<nav class="woocommerce-breadcrumb breadcrumbs"><a href="/shop/index">Shop</a>
 					<span class="divider">/</span> 	
@@ -12,9 +12,9 @@ use app\components\CustomPagination;
 				</nav>
 			</div>
 		</div>
-		<div class="col-sm-6 col-md-6 rightHeaderPage">
+		<div class="col-xs-12 col-sm-6 col-md-6 textCenter">
 			<div class="sort">
-		 		<p class="col-sm-6 col-md-6 pd0 textSort">Hiển thị một kết quả duy nhất</p>
+		 		<p class="col-sm-6 col-md-6 pd0 textSort pull-left">Hiển thị một kết quả duy nhất</p>
 		 		<form class="col-sm-6 col-md-6 pd0 formSort pull-right" id="formSort">
 		 			<select class="orderby" onchange="product.changeSort();">
 		 				<option <?=$sort == 'default' ? 'selected' : ''?> value="default">Thứ tự mặc định</option>
@@ -32,9 +32,9 @@ use app\components\CustomPagination;
 </div>
 <div id="main">
 	<div class="row category-page-row">
-		<div class="col large-3 hide-for-medium">
+		<div class="col-xs-12 col-sm-3 col-md-3">
 			<div id="shop-sidebar" class="sidebar-inner col-inner">
-				<ul class="sidebar-wrapper ul-reset ">
+				<ul class="danhMuc">
 					<aside id="nav_menu-2" class="widget widget_nav_menu">
 						<span class="widget-title "><span>Danh mục sản phẩm</span></span>
 						<div class="menu-danh-muc-san-pham-container">
@@ -48,18 +48,18 @@ use app\components\CustomPagination;
 						</div>
 					</aside>
 					<aside id="text-19" class="widget widget_text">
-						<div class="textwidget"><div><b><span style="color: #3d85c6; font-size: large;">HỖ TRỢ TRỰC TUYẾN</span></b></div>
+						<div class="textwidget"><div><b><span class="widgetStyle">HỖ TRỢ TRỰC TUYẾN</span></b></div>
 						<div><img src="/images/online_fpt.gif"></div>
 						<div>
-							<div><span style="font-size: xx-large; color: #ed1c24;"><b>0782112327</b></span></div>
+							<div><span class="phoneStyle"><b>0782112327</b></span></div>
 							<div>
-								<div><b><span style="color: #3d85c6; font-size: large;">HỖ TRỢ TRỰC TUYẾN</span></b></div>
+								<div><b><span class="widgetStyle">HỖ TRỢ TRỰC TUYẾN</span></b></div>
 								<div><img src="/images/online_fpt.gif"></div>
 								<div>
 									<div></div>
 								</div>
 								<div>
-									<div><span style="font-size: xx-large; color: #ed1c24;"><b>0782112327</b></span></div>
+									<div><span class="phoneStyle"><b>0782112327</b></span></div>
 								</div>
 							</div>
 						</div>
@@ -75,7 +75,7 @@ use app\components\CustomPagination;
 				</ul>
 			</div>
 		</div>
-		<div class="col large-9">
+		<div class="col-xs-12 col-sm-9 col-md-9">
 			<div class="shop-container">
 				<div class="products row row-small large-columns-4 medium-columns-3 small-columns-2 has-shadow row-box-shadow-1 row-box-shadow-1-hover">
 					<?php if(count($dataProducts) > 0){ ?>

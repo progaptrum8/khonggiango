@@ -967,12 +967,6 @@ th, td {
 .pd0{
     padding: 0;
 }
-.leftHeaderPage{
-    padding-left: 0px;
-}
-.rightHeaderPage{
-    padding-right: 0px;
-}
 .boldText{
     font-weight: bold;
 }
@@ -984,7 +978,6 @@ th, td {
 }
 .textSort{
     text-align: right;
-    left: 45px;
     margin-top: 10px;
 }
 .mgTop10{
@@ -1072,4 +1065,28 @@ th, td {
     padding: 0 9.8px 19.6px !important;
     margin-bottom: 0;
     margin-top: 20px;
+}
+.pdLeft15{
+    padding-left: 15px;
+}
+.pdTop30{
+    padding-top: 30px;
+}
+.colorYellow{
+    color: #ffff00;
+}
+.colorRed{
+    color: #ed1c24;
+}
+.fontSize140{
+    font-size: 140%;
+}
+.fontSize120{
+    font-size: 120%;
+}
+.widgetStyle{
+    color: #3d85c6; font-size: large;
+}
+.phoneStyle{
+    font-size: 20px; color: #ed1c24;
 }

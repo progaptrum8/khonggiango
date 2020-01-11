@@ -5233,7 +5233,8 @@ textarea.input-group-sm>.input-group-btn>.btn {
     -webkit-overflow-scrolling: touch;
     border-top: 1px solid transparent;
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1)
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+    background-color: #9c5d20;
 }
 
 .navbar-collapse.in {
@@ -5315,14 +5316,14 @@ textarea.input-group-sm>.input-group-btn>.btn {
     position: fixed;
     right: 0;
     left: 0;
-    z-index: 1030
+    z-index: 1030;
 }
 
 @media (min-width:768px) {
 
     .navbar-fixed-bottom,
     .navbar-fixed-top {
-        border-radius: 0
+        border-radius: 0;
     }
 }
 
@@ -5364,7 +5365,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 .navbar-toggle {
     position: relative;
-    float: lefts;
+    float: left;
     padding: 9px 10px;
     margin-top: 8px;
     margin-left: 15px;

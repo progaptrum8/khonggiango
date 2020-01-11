@@ -47,7 +47,7 @@
 								<span class="icon-bar"></span>
 							</button>
 						</div>
-						<div class="collapse navbar-collapse" id="collapse" style="background-color: #9c5d20;">
+						<div class="collapse navbar-collapse" id="collapse">
 							<ul class="nav header-nav header-bottom-nav nav-left  nav-divided nav-size-xlarge nav-spacing-xlarge nav-uppercase">
 								<li><a href="/" class="nav-top-link"><i class="fas fa-home whiteColor" aria-hidden="true"></i>Trang Chủ</a></li>
 								<li><a href="/site/about" class="nav-top-link">Giới thiệu</a></li>
@@ -70,20 +70,21 @@
 					<div class="bg section-bg fill bg-fill  bg-loaded"> </div><!-- .section-bg -->
 
 					<div class="section-content relative">
-
-
-						<div class="gap-element" style="display:block; height:auto; padding-top:30px"></div>
-
-						<div class="row" id="row-354768073">
-
+						<div class="row pdTop30">
 							<div class="col medium-6 small-12 large-6"><div class="col-inner">
 
-								<p><span style="font-size: 140%;">Slon gỗ tại: </span><br><span style="font-size: 120%;">64 -65 Nguyễn Phước Lan, Hòa Xuân, Cẩm Lệ, TP Đà Nẵng</span></p>
-
+								<p><span class="fontSize140">Slon gỗ tại: </span><br><span class="fontSize120">64 -65 Nguyễn Phước Lan, Hòa Xuân, Cẩm Lệ, TP Đà Nẵng</span>
+								</p>
 							</div></div>
 							<div class="col medium-6 small-12 large-6"><div class="col-inner">
 
-								<p><span style="font-size: 120%;"><span style="color: #ffff00;">Khonggiango.com</span> thuộc quản lý Của công ty CP XNK Mê Nam</span><br><span style="font-size: 120%;">Hotline: <strong><span style="color: #ed1c24;">0935.987.356 - 0777.248.567</span></strong></span><br><span style="font-size: 120%;">Địa chỉ: 64 -65 Nguyễn Phước Lan, Hòa Xuân, Cẩm Lệ, TP Đà Nẵng</span><br><span style="font-size: 120%;">Email: Khonggiango.com@gmail.com</span><br><span style="font-size: 120%;">Zalo: Khonggiango.com</span><br><span style="font-size: 120%;">FB: khonggiangocom</span></p>
+								<p>
+									<span>
+										<span class="colorYellow fontSize120">Khonggiango.com</span> thuộc quản lý Của công ty CP XNK Mê Nam</span><br>
+										<span class="fontSize120">Hotline: <strong><span class="colorRed">0935.987.356 - 0777.248.567</span></strong></span><br>
+										<span class="fontSize120">Địa chỉ: 64 -65 Nguyễn Phước Lan, Hòa Xuân, Cẩm Lệ, TP Đà Nẵng</span><br>
+										<span class="fontSize120">Email: Khonggiango.com@gmail.com</span><br>
+										<span class="fontSize120">Zalo: Khonggiango.com</span><br><span class="fontSize120">FB: khonggiangocom</span></p>
 
 							</div></div>
 
@@ -112,12 +113,12 @@
 		</a>
 		<!-- Contact -->
 		<div class="call-mobile1">
-			<a data-animate="fadeInDown" rel="noopener noreferrer" href="https://m.me/tynguyen19" target="_blank" class="button success" style="border-radius:99px;" data-animated="true">
+			<a data-animate="fadeInDown" rel="noopener noreferrer" href="https://m.me/tynguyen19" target="_blank" class="button success" data-animated="true">
 			    <span>Chat Facebook</span>
 			</a>
 		</div>
 		<div class="call-mobile2">
-			<a data-animate="fadeInDown" rel="noopener noreferrer" href="http://zalo.me/0782112327" target="_blank" class="button success" style="border-radius:99px;background: #0c8800 !important;" data-animated="true"> 
+			<a data-animate="fadeInDown" rel="noopener noreferrer" href="http://zalo.me/0782112327" target="_blank" class="button success" data-animated="true"> 
 				<span>Chat Zalo</span>
 			</a>
 		</div>
@@ -144,19 +145,8 @@
 					cache: cache
 				});
 			};
-		})();
-		$(document).ready(function()
-		{
-			$(".search_icon").click(function() {
-		        $('.search_bar').fadeOut();
-		        $("i", this).toggleClass("fa-search fa-close");
-		    });
-		    $(document).on('click', '.fa-close', function() {
-		        $('.search_bar').fadeIn();
-		    });
 
-
-		    var scrollTop = $(".scrollTop");
+			var scrollTop = $(".scrollTop");
 
 		    $(window).scroll(function() {
 				// declare variable
@@ -168,6 +158,14 @@
 					$(scrollTop).css("opacity", "0");
 				}
 
+				if(topPos > 300){
+					$('.navbar-default').addClass('navbar-fixed-top');
+					$('.header-nav').addClass('pdLeft15');
+				}else{
+					$('.navbar-default').removeClass('navbar-fixed-top');
+					$('.header-nav').removeClass('pdLeft15');
+				}
+
 			});
 			//Click event to scroll to top
 			$(scrollTop).click(function() {
@@ -176,7 +174,16 @@
 				}, 800);
 				return false;
 			});
-
+		})();
+		$(document).ready(function()
+		{
+			$(".search_icon").click(function() {
+		        $('.search_bar').fadeOut();
+		        $("i", this).toggleClass("fa-search fa-close");
+		    });
+		    $(document).on('click', '.fa-close', function() {
+		        $('.search_bar').fadeIn();
+		    });
 		});
 
 	</script>

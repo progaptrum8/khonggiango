@@ -41,5 +41,10 @@
 	color: #fff;
 	font-weight: 700;
 }
-
+.call-mobile1 a{
+	border-radius:99px;
+}
+.call-mobile2 a{
+	border-radius:99px;background: #0c8800 !important;
+}
 

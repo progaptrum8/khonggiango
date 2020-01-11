@@ -6,22 +6,22 @@ use app\components\CustomPagination;
 $this->registerJsFile(
         '@web/js/sanpham/product.js', ['depends' => [\yii\web\JqueryAsset::className()]]
 );
-$this->title = 'Sản phẩm';
+$this->title = 'Feedback';
 ?>
-<div class="listDanhMuc">
+<div class="listFeedback">
     <section class="content-header">
         <h1>
-            Danh sách sản phẩm
+            Danh sách đánh giá sản phẩm
         </h1>
         <div class="breadcrumb">
-            <a class="btn btn-danger pull-right mg-left" id="deleteDanhMucSP" ><i class="fa fa-trash"></i> Xóa</a>
-            <a class="btn btn-success pull-right mg-left" id="addDanhMucSP" href="/sanpham/san-pham/input"><i class="fa fa-plus"></i> Thêm mới</a>
+            <a class="btn btn-danger pull-right mg-left" id="deleteFeedBack" ><i class="fa fa-trash"></i> Xóa</a>
+            <a class="btn btn-success pull-right mg-left" id="addDanhMucSP" href="/sanpham/feedback/input"><i class="fa fa-plus"></i> Thêm mới</a>
         </div>	
     </section>
     <!-- Main content -->
     <section class="content">
         <div class="box box-default">
-            <?= Html::beginForm(['/sanpham/san-pham/index'], 'post', ['id' => 'searchForm','name'=>'searchForm']) ?>
+            <?= Html::beginForm(['/sanpham/feedback/index'], 'post', ['id' => 'searchForm','name'=>'searchForm']) ?>
             <div class="box-header with-border">
                 <div class="row">
                     <div class="form-row">
@@ -43,11 +43,19 @@ $this->title = 'Sản phẩm';
                                 <?php } ?>
                             </select>
                         </div>
+                        <div class="form-group col-md-4">
+                            <label for="status">Công khai:</label>
+                            <select class="form-control" name="status" id="status">
+                                <option <?=$status == 2 ? 'selected' : ''?> value="2">Tất cả</option>
+                                <option <?=$status == 0 ? 'selected' : ''?> value="0">Chưa công khai</option>
+                                <option <?=$status == 1 ? 'selected' : ''?> value="1">Đã công khai</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="input-group">
-                                <input class="form-control" placeholder="Nhập tên danh mục sản phẩm để tìm kiếm" type="text" name="search" value="<?=$search?>">
+                                <input class="form-control" placeholder="Nhập tên sản phẩm/danh mục sản phẩm/loại sản phẩm để tìm kiếm" type="text" name="search" value="<?=$search?>">
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary pull-right mg-left" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
                                 </span>
@@ -66,8 +74,11 @@ $this->title = 'Sản phẩm';
                                             <th>STT</th>
                                             <th>Hình sản phẩm</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Danh mục sản phẩm</th>
-                                            <th>Loại sản phẩm</th>
+                                            <th>Người đánh giá</th>
+                                            <th>Email</th>
+                                            <th>Đánh giá</th>
+                                            <th>Ngày đánh giá</th>
+                                            <th>Được public</th>
                                         </tr>
                                     </thead>
                                     <tbody> 
@@ -90,15 +101,24 @@ $this->title = 'Sản phẩm';
                                                         </a>
                                                     </td>
                                                     <td class="" data-value="<?=$item["id"]?>">
-                                                        <a href="<?= Url::to(['/sanpham/san-pham/input','id'=>$item["id"]]) ?>">
+                                                        <a href="<?= Url::to(['/sanpham/feedback/input','id'=>$item["id"]]) ?>">
                                                             <?php echo $item["title"]?>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <?=$item["nameDMSP"]?>
+                                                        <?=$item["fullname"]?>
                                                     </td>
                                                     <td>
-                                                        <?=$item["nameLoaiSP"]?>
+                                                        <?=$item["email"]?>
+                                                    </td>
+                                                    <td>
+                                                        <?=$item["comment"]?>
+                                                    </td>
+                                                    <td>
+                                                        <?=$item["dateComment"]?>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" <?=$item['status'] == 1 ? 'checked' : ''?> class="isPublicComment" onclick="sanPhamByEvent.changeStatus(<?=$item["id"]?>, this);">
                                                     </td>
                                                 </tr>
                                             <?php }
@@ -140,7 +160,7 @@ $this->title = 'Sản phẩm';
 </div>	
 <script type="text/javascript"> 
     function pageClick(page){
-        document.searchForm.action = '/sanpham/san-pham/index?page='+(page+1);
+        document.searchForm.action = '/sanpham/feedback/index?page='+(page+1);
         document.searchForm.submit();
     }
 </script>

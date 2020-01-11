@@ -10,8 +10,9 @@ use app\models\Products;
 use app\models\DanhMucSanPham;
 use app\models\ProductTypes;
 use app\models\QlFiledinhkem;
+use app\models\Feedback;
 
-class SanPhamController extends BaseController {
+class FeedbackController extends BaseController {
 
     public function beforeAction($action)
     {
@@ -24,9 +25,13 @@ class SanPhamController extends BaseController {
         //Tìm kiếm
         $stringCondition = " 1=1 ";
         $arrayCondition = array();
-        $search = trim(Yii::$app->request->post("search"));
         $danhMucSearch = (int)(Yii::$app->request->post('danhMucSP'));
         $productTypeSearch = (int)(Yii::$app->request->post('productType'));
+        $status = -1;
+        if(Yii::$app->request->post('status') != '' && Yii::$app->request->post('status') != null){
+            $status = (int)Yii::$app->request->post('status');
+        }
+        $search = trim(Yii::$app->request->post("search"));
         if ($search != null && $search != "") {
             $stringCondition .= " AND  ( MATCH (dmsp.`name`) AGAINST (:searchLike IN NATURAL LANGUAGE MODE) OR MATCH (pt.`name`) AGAINST (:searchLike IN NATURAL LANGUAGE MODE) OR MATCH (pd.`title`) AGAINST (:searchLike IN NATURAL LANGUAGE MODE) )  ";
             $arrayCondition[':searchLike'] = $search;
@@ -39,11 +44,17 @@ class SanPhamController extends BaseController {
             $stringCondition .= " AND pt.id = :productTypeSearch ";
             $arrayCondition[':productTypeSearch'] = $productTypeSearch;
         }
-        $query = Products::find()->alias('pd')
-                ->select('pd.*, dmsp.`name` as nameDMSP, pt.`name` as nameLoaiSP')
-                ->join('INNER JOIN','danhmuc_sanpham as dmsp', 'dmsp.id = pd.id_danhmuc')
+        if($status >=0 && $status < 2 ){
+            $stringCondition .= " AND fb.status = :status ";
+            $arrayCondition[':status'] = $status;
+        }
+        $query = Feedback::find()->alias('fb')
+                ->select('pd.title, pd.thumbnail, dmsp.`name` as nameDMSP, pt.`name` as nameLoaiSP, fb.fullname, fb.email, fb.comment, fb.created_date as dateComment, fb.status, fb.id')
+                ->join('INNER JOIN','products as pd', 'fb.product_id = pd.id')
+                ->join('LEFT JOIN','danhmuc_sanpham as dmsp', 'dmsp.id = pd.id_danhmuc')
                 ->join('LEFT JOIN','product_types as pt', 'pt.id = pd.id_product_type')
-                ->where($stringCondition, $arrayCondition);
+                ->where($stringCondition, $arrayCondition)
+                ->orderBy("fb.created_date DESC, fb.status DESC");
         // echo $query->createCommand()->rawSql;exit;
         //Phân trang
         $pageSize = Yii::$app->request->post("pageSize");
@@ -74,6 +85,7 @@ class SanPhamController extends BaseController {
             'productTypes' => $getProductType,
             'danhMucSearch' => $danhMucSearch,
             'productTypeSearch' => $productTypeSearch,
+            'status' => $status
         ]);
     }
     
@@ -82,48 +94,40 @@ class SanPhamController extends BaseController {
             $idSelected = Yii::$app->request->post("idSelected");
             if(is_array($idSelected)){
                 foreach ($idSelected as $id){
-                    $item = Products::findOne($id);
+                    $item = Feedback::findOne($id);
                     $item->delete();
-                    $model = QlFiledinhkem::deleteAll(['idObject' => $id]);
                 }
             }else{
-                $item = Products::findOne($idSelected);
+                $item = Feedback::findOne($idSelected);
                 $item->delete();
-                $model = QlFiledinhkem::deleteAll(['idObject' => $idSelected]);
             }
         } catch (\yii\base\Exception $e) {
             Yii::$app->getSession()->setFlash('error', 'Xóa dữ liệu không thành công!');
-            return $this->redirect("/sanpham/san-pham/index");
+            return $this->redirect("/sanpham/feedback/index");
         }
         Yii::$app->getSession()->setFlash('success', 'Xóa dữ liệu thành công!');
-        return $this->redirect("/sanpham/san-pham/index");
+        return $this->redirect("/sanpham/feedback/index");
     }
     
     public function actionInput() {
-        $item = new Products();
+        $item = new Feedback();
         $id = (int)trim(Yii::$app->request->get("id"));
-        $danhMucSP = DanhMucSanPham::find()->all();
-        $productTypes = ProductTypes::find()->all();
-        $imageProduct = [];
+        $products = Products::find()->all();
         if ((int) $id > 0) {
-            $itemFind = Products::findOne($id);
-            $imageProduct = QlFiledinhkem::find()->where(['idObject' => $id ])->asArray()->all();
+            $itemFind = Feedback::findOne($id);
             if ($itemFind != null) {
                 $item = $itemFind;
                 return $this->render('input', [
                     'data' => $item,
                     'updateForm' => true,
-                    'danhMucSP' => $danhMucSP,
-                    'productTypes' => $productTypes,
-                    'imageProduct' => $imageProduct
+                    'products' => $products
                 ]);
             }
         }
         return $this->render('input', [
-            'data' => $item,'updateForm' => false,
-            'danhMucSP' => $danhMucSP,
-            'productTypes' => $productTypes,
-            'imageProduct' => $imageProduct
+            'data' => $item,
+            'updateForm' => false,
+            'products' => $products
         ]);
     }
     
@@ -132,60 +136,24 @@ class SanPhamController extends BaseController {
         {
             try {
                 $requests = Yii::$app->request->post();
-                $pathFile = Yii::$app->params['pathFileCustom'] . '\Upload/';
-                $urlThumbnail = "";
-                $mime = "";
-                $dataResize = [];
-                $dataFiles = $_FILES['files'];
-                if($_FILES['thumbnail']['size'] > 0) { // save thumbnail image
-                    $dataResize = QlFiledinhkem::getDataFileAfterResize($_FILES['thumbnail']);
+                $id = Yii::$app->request->post('id');
+                $status = 0;
+                if($requests['status'] == 'on'){
+                    $status = 1;
                 }
-                if(count($dataResize) > 0){
-                    $urlThumbnail = $dataResize['urlThumbnail'];
-                }
-
-                $id = $requests["id"] != null && $requests["id"] != '' ? $requests["id"] : 0 ;
-                $model = new Products();
+                $model = new Feedback();
                 if ((int) $id > 0) {
-                    $model = Products::findOne($id);
+                    $model = Feedback::findOne($id);
                 }
-                $model->title = trim($requests['title']);
-                $model->describe = trim($requests['describe']);
-                $model->id_danhmuc = trim($requests['id_danhmuc']);
-                $model->id_product_type = trim($requests['id_product_type']);
-                $model->date_created = date("Y-m-d H:i:s");
-                $model->price = $requests['price'] !="" && $requests['price'] != null ? trim($requests['price']) : "0 VNĐ";
-                if($urlThumbnail != "" && $urlThumbnail != null){
-                   $model->thumbnail = $urlThumbnail;
-                }
+                $model->fullname = trim($requests['fullname']);
+                $model->email = trim($requests['email']);
+                $model->product_id = (int)$requests['productId'];
+                $model->comment = trim($requests['comment']);
+                $model->created_date = date("Y-m-d H:i:s");
+                $model->status = $status;
                 if($model->save()){
-                    $idProject = $model->id;
-                    $dataInsert = [];
-                    $pathFile = Yii::$app->params['pathFileCustom'] . '\Upload/';
-                    for ($i=0; $i < count($dataFiles['name']) ; $i++) { 
-                        if($dataFiles['size'][$i] > 0){
-                            $file = $dataFiles['tmp_name'][$i];
-                            $sourceProperties = getimagesize($file);
-                            $mime = $sourceProperties['mime'];
-                            $ext = pathinfo($dataFiles['name'][$i], PATHINFO_EXTENSION);
-                            $fileNewName = md5($dataFiles['name'][$i].rand(0,9999999)).".".$ext;
-                            move_uploaded_file($dataFiles['tmp_name'][$i], $pathFile.'/'.$fileNewName);
-                            $dataInsert[] = [
-                                'maSo' => $fileNewName,
-                                'fileName' => $dataFiles['name'][$i],
-                                'mime' => $mime,
-                                'idProject' => $idProject
-                            ];
-                        }
-                    }
-                    $insert = QlFiledinhkem::insertAttachmentToDb($dataInsert);
-                    if($insert){
-                        Yii::$app->getSession()->setFlash('success', 'Thêm mới/Cập nhật sản phẩm thành công!');
-                        return $this->redirect("/sanpham/san-pham/index"); 
-                    }else {
-                        throw new \yii\web\HttpException(404, 'Có lỗi xảy ra');
-                    }
-                               
+                    Yii::$app->getSession()->setFlash('success', 'Thêm mới/Cập nhật sản phẩm thành công!');
+                    return $this->redirect("/sanpham/feedback/index");       
                 }else{
                     return $this->render('input', ['data' => $model,'updateForm' => true]);
                 }
@@ -218,17 +186,17 @@ class SanPhamController extends BaseController {
         }
     }
 
-    public function actionUpdateIsNoiBat(){
+    public function actionChangeStatus(){
         if (Yii::$app->request->isPost)
         {
             try {
                 $requests = Yii::$app->request->post();
                 $value = $requests['value'];
-                $productId = $requests['productId'];
-                if($productId != "" && $productId != null){
-                    $model = Products::findOne($productId);
+                $feedbackId = $requests['feedbackId'];
+                if($feedbackId != "" && $feedbackId != null){
+                    $model = Feedback::findOne($feedbackId);
                     if(count($model) > 0){
-                        $model->is_noibat = $value;
+                        $model->status = $value;
                         $model->save();
                     }
                 }
