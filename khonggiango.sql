@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 09/01/2020 00:59:42
+ Date: 14/01/2020 21:48:55
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,7 @@ CREATE TABLE `about`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of about
@@ -87,6 +87,7 @@ INSERT INTO `auth_item` VALUES ('/qtht/nhomnguoidung/*', 2, 'Quản  trị nhóm
 INSERT INTO `auth_item` VALUES ('/qtht/nhomquyen/*', 2, 'Quản trị nhóm quyền', NULL, NULL, NULL, 20170807);
 INSERT INTO `auth_item` VALUES ('/qtht/setting-page/index', 2, 'Settings page', NULL, NULL, NULL, NULL);
 INSERT INTO `auth_item` VALUES ('/qtht/user/*', 2, 'Quản trị người dùng', NULL, NULL, NULL, 20170807);
+INSERT INTO `auth_item` VALUES ('/sanpham/feedback/index', 2, 'Quản lý đánh giá sản phẩm', NULL, NULL, NULL, NULL);
 INSERT INTO `auth_item` VALUES ('/sanpham/san-pham/index', 2, 'Quản lý sản phẩm', NULL, NULL, NULL, NULL);
 INSERT INTO `auth_item` VALUES ('/thongtin/vanban/*', 2, 'văn bản', NULL, NULL, NULL, 20170810);
 INSERT INTO `auth_item` VALUES ('/thongtin/vanban/index', 2, 'Danh sách văn bản', NULL, NULL, NULL, 20171002);
@@ -153,6 +154,7 @@ INSERT INTO `auth_item_child` VALUES ('HT', '/qtht/nhomquyen/*');
 INSERT INTO `auth_item_child` VALUES ('ADMIN', '/qtht/setting-page/index');
 INSERT INTO `auth_item_child` VALUES ('ADMIN', '/qtht/user/*');
 INSERT INTO `auth_item_child` VALUES ('HT', '/qtht/user/*');
+INSERT INTO `auth_item_child` VALUES ('ADMIN', '/sanpham/feedback/index');
 INSERT INTO `auth_item_child` VALUES ('ADMIN', '/sanpham/san-pham/index');
 INSERT INTO `auth_item_child` VALUES ('ADMIN', '/thongtin/vanban/*');
 INSERT INTO `auth_item_child` VALUES ('BCTK', '/thongtin/vanban/*');
@@ -199,7 +201,7 @@ CREATE TABLE `cash`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of cash
@@ -229,22 +231,12 @@ CREATE TABLE `contact`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of contact
 -- ----------------------------
 INSERT INTO `contact` VALUES (1, 'PHAgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdpbi1ib3R0b206IDAuMzNlbTsgbWFyZ2luLXRvcDogMHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBmb250LWZhbWlseTogUm9ib3RvLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEzcHg7IGZvbnQtc3R5bGU6IG5vcm1hbDsgZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9ybWFsOyBmb250LXZhcmlhbnQtY2Fwczogbm9ybWFsOyBmb250LXdlaWdodDogNDAwOyBsZXR0ZXItc3BhY2luZzogbm9ybWFsOyBvcnBoYW5zOiAyOyB0ZXh0LWluZGVudDogMHB4OyB0ZXh0LXRyYW5zZm9ybTogbm9uZTsgd2hpdGUtc3BhY2U6IG5vcm1hbDsgd2lkb3dzOiAyOyB3b3JkLXNwYWNpbmc6IDBweDsgLXdlYmtpdC10ZXh0LXN0cm9rZS13aWR0aDogMHB4OyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSk7IHRleHQtZGVjb3JhdGlvbi1zdHlsZTogaW5pdGlhbDsgdGV4dC1kZWNvcmF0aW9uLWNvbG9yOiBpbml0aWFsOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PHNwYW4gc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMjMuNHB4OyBjb2xvcjogcmdiKDIzNywgMjgsIDM2KTsiPjxzdHJvbmcgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtd2VpZ2h0OiBib2xkZXI7Ij5LSMOUTkcgR0lBTiBH4buWPC9zdHJvbmc+PC9zcGFuPjwvcD48cCBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgbWFyZ2luLWJvdHRvbTogMC4zM2VtOyBtYXJnaW4tdG9wOiAwcHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGZvbnQtZmFtaWx5OiBSb2JvdG8sIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTNweDsgZm9udC1zdHlsZTogbm9ybWFsOyBmb250LXZhcmlhbnQtbGlnYXR1cmVzOiBub3JtYWw7IGZvbnQtdmFyaWFudC1jYXBzOiBub3JtYWw7IGZvbnQtd2VpZ2h0OiA0MDA7IGxldHRlci1zcGFjaW5nOiBub3JtYWw7IG9ycGhhbnM6IDI7IHRleHQtaW5kZW50OiAwcHg7IHRleHQtdHJhbnNmb3JtOiBub25lOyB3aGl0ZS1zcGFjZTogbm9ybWFsOyB3aWRvd3M6IDI7IHdvcmQtc3BhY2luZzogMHB4OyAtd2Via2l0LXRleHQtc3Ryb2tlLXdpZHRoOiAwcHg7IGJhY2tncm91bmQtY29sb3I6IHJnYigyNTUsIDI1NSwgMjU1KTsgdGV4dC1kZWNvcmF0aW9uLXN0eWxlOiBpbml0aWFsOyB0ZXh0LWRlY29yYXRpb24tY29sb3I6IGluaXRpYWw7IHRleHQtYWxpZ246IGxlZnQ7Ij48c3BhbiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAyMy40cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij48c3Ryb25nIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXdlaWdodDogYm9sZGVyOyI+S2hvbmdnaWFuZ28uY29tPC9zdHJvbmc+IHRodeG7mWMgcXXhuqNuIGzDvSBD4bunYSBjw7RuZyB0eSBDUCBYTksgTcOqIE5hbTwvc3Bhbj48YnIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7Ij48c3BhbiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAyMy40cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij48c3BhbiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgY29sb3I6IHJnYigyMzcsIDI4LCAzNik7Ij48c3Ryb25nIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXdlaWdodDogYm9sZGVyOyI+SG90bGluZTo8L3N0cm9uZz48L3NwYW4+IDA5MzUuOTg3LjM1NiDigJMgMDc3Ny4yNDguNTY3PC9zcGFuPjxiciBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsiPjxzcGFuIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IDIzLjRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsiPjxzcGFuIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBjb2xvcjogcmdiKDIzNywgMjgsIDM2KTsiPjxzdHJvbmcgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtd2VpZ2h0OiBib2xkZXI7Ij7EkOG7i2EgY2jhu4k6PC9zdHJvbmc+PC9zcGFuPiA2NCAtNjUgTmd1eeG7hW4gUGjGsOG7m2MgTGFuLCBIw7JhIFh1w6JuLCBD4bqpbSBM4buHLCBUUCDEkMOgIE7hurVuZzwvc3Bhbj48YnIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7Ij48c3BhbiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAyMy40cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij48c3BhbiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgY29sb3I6IHJnYigyMzcsIDI4LCAzNik7Ij48c3Ryb25nIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXdlaWdodDogYm9sZGVyOyI+RW1haWw6PC9zdHJvbmc+Jm5ic3A7PC9zcGFuPktob25nZ2lhbmdvLmNvbUBnbWFpbC5jb208L3NwYW4+PGJyIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyI+PHNwYW4gc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtc2l6ZTogMjMuNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+PHNwYW4gc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGNvbG9yOiByZ2IoMjM3LCAyOCwgMzYpOyI+PHN0cm9uZyBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC13ZWlnaHQ6IGJvbGRlcjsiPlphbG86PC9zdHJvbmc+Jm5ic3A7PC9zcGFuPktob25nZ2lhbmdvLmNvbTwvc3Bhbj48YnIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7Ij48c3BhbiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiAyMy40cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij48c3BhbiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgY29sb3I6IHJnYigyMzcsIDI4LCAzNik7Ij48c3Ryb25nIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXdlaWdodDogYm9sZGVyOyI+RkI6PC9zdHJvbmc+PC9zcGFuPiBraG9uZ2dpYW5nb2NvbTwvc3Bhbj48L3A+PC9wPg==');
-
--- ----------------------------
--- Table structure for danhmuc_nguoiky
--- ----------------------------
-DROP TABLE IF EXISTS `danhmuc_nguoiky`;
-CREATE TABLE `danhmuc_nguoiky`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for danhmuc_sanpham
@@ -285,7 +277,7 @@ CREATE TABLE `feedback`  (
   `created_date` datetime(0) NULL DEFAULT NULL,
   `status` tinyint(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of feedback
@@ -296,7 +288,8 @@ INSERT INTO `feedback` VALUES (4, 5, 'Tâm', 'tamabc@gmail.com', 'Tạm tạm', 
 INSERT INTO `feedback` VALUES (5, 5, 'mặt loằn', 'mlabc@gmail.com', 'Như loằn', '2020-01-02 10:03:24', 1);
 INSERT INTO `feedback` VALUES (6, 5, 'fuck boy', 'fuckabv@gmail.com', 'fucking good', '2020-01-02 10:03:40', 1);
 INSERT INTO `feedback` VALUES (7, 5, 'heyboy', 'heyboy@gmail.com', 'hey hey', '2020-01-02 10:04:21', 1);
-INSERT INTO `feedback` VALUES (14, 8, '123123', '121212@gmail.com', '123123', '2020-01-09 12:21:18', 0);
+INSERT INTO `feedback` VALUES (14, 8, '123123', '121212@gmail.com', '123123 asdasdas mdkas masodm asoidm asoidm oaisdm aosid', '2020-01-09 12:21:18', 0);
+INSERT INTO `feedback` VALUES (15, 9, 'tesst', 'test@gmail.com', 'test', NULL, 0);
 
 -- ----------------------------
 -- Table structure for guest_visit
@@ -510,7 +503,7 @@ CREATE TABLE `menu`  (
   `data` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `class` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of menu
@@ -522,11 +515,10 @@ INSERT INTO `menu` VALUES (4, 'Báo cáo thống kê', NULL, '', 4, NULL, 'fa fa
 INSERT INTO `menu` VALUES (10, 'Quản trị menu', 1, '/qtht/menu/index', 6, NULL, NULL);
 INSERT INTO `menu` VALUES (11, 'Danh mục sản phẩm', 2, '/danhmuc/danh-muc-san-pham/index', 1, NULL, '');
 INSERT INTO `menu` VALUES (19, 'Báo cáo thống kê', 4, '/baocao/baocaothongke/index', 1, NULL, '');
-INSERT INTO `menu` VALUES (20, 'Báo cáo theo người tạo', 4, '/baocao/baocaothongketheonguoi/index', 2, NULL, '');
-INSERT INTO `menu` VALUES (21, 'Báo cáo theo cơ quan', 4, '/baocao/baocaothongketheocoquan/index', 3, NULL, '');
 INSERT INTO `menu` VALUES (23, 'Settings page', 3, '/qtht/setting-page/index', 0, NULL, '');
 INSERT INTO `menu` VALUES (24, 'Quản lý sản phẩm', 2, '/sanpham/san-pham/index', 0, NULL, '');
 INSERT INTO `menu` VALUES (25, 'Quản lý Loại sản phẩm', 2, '/danhmuc/loai-san-pham/index', 0, NULL, '');
+INSERT INTO `menu` VALUES (26, 'Quản lý đánh giá sản phẩm', 2, '/sanpham/feedback/index', 0, NULL, '');
 
 -- ----------------------------
 -- Table structure for migration
@@ -613,17 +605,17 @@ CREATE TABLE `products`  (
   INDEX `id_danhmuc`(`id_danhmuc`) USING BTREE,
   INDEX `id_product_type`(`id_product_type`) USING BTREE,
   FULLTEXT INDEX `titleFullText`(`title`)
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (4, 'Salon gỗ đỏ tay 12 Chạm Nghê', 'Salon gỗ đỏ tay 12 Chạm Nghê', '/Upload/2f099ab4372577b3b52278e2c36ef351.jpg', 16, 3, 1, 9, '2020-01-01 11:55:49', 'salon-go-do-tay-12-cham-nghe', '15,100,000VNĐ');
-INSERT INTO `products` VALUES (5, 'Salon gỗ đỏ tay 12 Chạm Đào', 'Salon gỗ đỏ tay 12 Chạm Đào', '/Upload/57966b189e2c7e9ec54ce479a23f6e9a.jpg', 16, 3, 1, 2, '2019-12-27 17:16:37', 'salon-go-do-tay-12-cham-dao', '0 VNĐ');
-INSERT INTO `products` VALUES (6, 'Salon gỗ đỏ tay 10 Chạm Đào', 'Salon gỗ đỏ tay 10 Chạm Đào', '/Upload/3b73c96908185907e68bb6362fa5539e.jpeg', 16, 3, 1, 0, '2019-12-27 17:24:00', 'salon-go-do-tay-10-cham-dao', '0 VNĐ');
-INSERT INTO `products` VALUES (7, 'Salon gỗ đỏ Hoàng Gia', 'Salon gỗ đỏ Hoàng Gia', '/Upload/628bd762d28f6c8c4c49a4ab0416f86e.jpg', 16, 3, 1, 7, '2019-12-27 17:24:41', 'salon-go-do-hoang-gia', '0 VNĐ');
-INSERT INTO `products` VALUES (8, 'Án gian tờ tổ gỗ cao cấp', 'Án gian tờ tổ gỗ cao cấp', '/Upload/e998bf8b817b59bbe609a765efbb88e1.jpg', 1, 4, 1, 2, '2019-12-27 17:25:20', 'an-gian-to-to-go-cao-cap', '0 VNĐ');
-INSERT INTO `products` VALUES (9, 'Bàn thờ gia tiên khắc chữ vạn', 'Bàn thờ gia tiên khắc chữ vạn', '/Upload/b4c4e4b38ef6c39902aa7a4355e6d042.jpg', 1, 4, 1, 3, '2019-12-27 17:25:41', 'ban-tho-gia-tien-khac-chu-van', '0 VNĐ');
+INSERT INTO `products` VALUES (4, 'Salon gỗ đỏ tay 12 Chạm Nghê', 'Salon gỗ đỏ tay 12 Chạm Nghê', '/Upload/2f099ab4372577b3b52278e2c36ef351.jpg', 16, 3, 1, 12, '2020-01-01 11:55:49', 'salon-go-do-tay-12-cham-nghe', '15,100,000VNĐ');
+INSERT INTO `products` VALUES (5, 'Salon gỗ đỏ tay 12 Chạm Đào', 'Salon gỗ đỏ tay 12 Chạm Đào', '/Upload/57966b189e2c7e9ec54ce479a23f6e9a.jpg', 16, 3, 1, 5, '2019-12-27 17:16:37', 'salon-go-do-tay-12-cham-dao', '0 VNĐ');
+INSERT INTO `products` VALUES (6, 'Salon gỗ đỏ tay 10 Chạm Đào', 'Salon gỗ đỏ tay 10 Chạm Đào', '/Upload/3b73c96908185907e68bb6362fa5539e.jpeg', 16, 3, 1, 1, '2019-12-27 17:24:00', 'salon-go-do-tay-10-cham-dao', '0 VNĐ');
+INSERT INTO `products` VALUES (7, 'Salon gỗ đỏ Hoàng Gia', 'Salon gỗ đỏ Hoàng Gia', '/Upload/628bd762d28f6c8c4c49a4ab0416f86e.jpg', 16, 3, 1, 8, '2019-12-27 17:24:41', 'salon-go-do-hoang-gia', '0 VNĐ');
+INSERT INTO `products` VALUES (8, 'Án gian tờ tổ gỗ cao cấp', 'Án gian tờ tổ gỗ cao cấp', '/Upload/e998bf8b817b59bbe609a765efbb88e1.jpg', 1, 4, 1, 9, '2019-12-27 17:25:20', 'an-gian-to-to-go-cao-cap', '0 VNĐ');
+INSERT INTO `products` VALUES (9, 'Bàn thờ gia tiên khắc chữ vạn', 'Bàn thờ gia tiên khắc chữ vạn', '/Upload/b4c4e4b38ef6c39902aa7a4355e6d042.jpg', 1, 4, 1, 4, '2019-12-27 17:25:41', 'ban-tho-gia-tien-khac-chu-van', '0 VNĐ');
 INSERT INTO `products` VALUES (10, 'Bàn thờ gia tiên mẫu mới hiện đại', 'Bàn thờ gia tiên mẫu mới hiện đại', '/Upload/0fa39ab5d34cff73ef73d3d740dbd4c1.jpg', 1, 4, 1, 1, '2019-12-27 17:26:07', 'ban-tho-gia-tien-mau-moi-hien-dai', '0 VNĐ');
 INSERT INTO `products` VALUES (11, 'Bàn thờ kèm đôn mẫu đẹp', 'Bàn thờ kèm đôn mẫu đẹp', '/Upload/2276ca9cb427ccd4b303ae61d7c017c0.jpg', 1, 4, 1, 0, '2019-12-27 17:26:34', 'ban-tho-kem-don-mau-dep', '0 VNĐ');
 INSERT INTO `products` VALUES (12, 'Mẫu bàn thờ hoa văn cổ', 'Mẫu bàn thờ hoa văn cổ', '/Upload/7c01a3437fbe6fdbab649ea603afda4b.jpg', 1, 4, 1, 1, '2019-12-27 17:26:57', 'mau-ban-tho-hoa-van-co', '0 VNĐ');
@@ -631,9 +623,10 @@ INSERT INTO `products` VALUES (13, 'Bàn ăn gỗ căm xe mặt gõ đỏ 6 gh�
 INSERT INTO `products` VALUES (14, 'Bàn ăn gỗ sồi 1m8', 'Bàn ăn gỗ sồi 1m8', '/Upload/66e18d8d8f47771ff646029d66d9cf0a.jpg', 13, 5, 1, 0, '2019-12-27 17:27:48', 'ban-an-go-soi-1m8', '0 VNĐ');
 INSERT INTO `products` VALUES (15, 'Bàn ăn gỗ sồi 4 ghế', 'Bàn ăn gỗ sồi 4 ghế', '/Upload/bd07cbe5d8f5f82c1bf8b3702073fd5d.jpg', 13, 5, 1, 0, '2019-12-27 17:28:16', 'ban-an-go-soi-4-ghe', '0 VNĐ');
 INSERT INTO `products` VALUES (16, 'Kệ tivi gỗ đinh hương 1,6m', 'Kệ tivi gỗ đinh hương 1,6m', '/Upload/4ff6d236b744df135015dff447b41c93.jpg', 6, 6, 1, 0, '2019-12-27 17:28:54', 'ke-tivi-go-dinh-huong-16m', '0 VNĐ');
-INSERT INTO `products` VALUES (17, 'Kệ tivi gỗ đinh hương 1,8m', 'Kệ tivi gỗ đinh hương 1,8m', '/Upload/642ed0f33bbe25102ec8f5e4856ae448.jpg', 6, 6, 1, 0, '2019-12-27 17:29:24', 'ke-tivi-go-dinh-huong-18m', '0 VNĐ');
+INSERT INTO `products` VALUES (17, 'Kệ tivi gỗ đinh hương 1,8m', 'Kệ tivi gỗ đinh hương 1,8m', '/Upload/642ed0f33bbe25102ec8f5e4856ae448.jpg', 6, 6, 1, 1, '2019-12-27 17:29:24', 'ke-tivi-go-dinh-huong-18m', '0 VNĐ');
 INSERT INTO `products` VALUES (18, 'Kệ tivi gỗ cẩm 2,2m', 'Kệ tivi gỗ cẩm 2,2m', '/Upload/c7e441ebc312321430f5d894024cae1e.jpg', 6, 6, 1, 0, '2019-12-27 17:29:41', 'ke-tivi-go-cam-22m', '0 VNĐ');
-INSERT INTO `products` VALUES (20, 'Test', 'test', '/Upload/4942141-6602700762-yasuo.jpg', 16, 3, 1, 20, '2020-01-07 17:02:04', '123123', '15,000,000VNĐ');
+INSERT INTO `products` VALUES (20, 'Test', 'test', '/Upload/4942141-6602700762-yasuo.jpg', 16, 3, 1, 26, '2020-01-07 17:02:04', '123123', '15,000,000VNĐ');
+INSERT INTO `products` VALUES (24, '', '', NULL, NULL, NULL, 0, 0, '2020-01-11 11:07:51', '', '0 VNĐ');
 
 -- ----------------------------
 -- Table structure for promotion
@@ -643,7 +636,7 @@ CREATE TABLE `promotion`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of promotion
@@ -666,7 +659,7 @@ CREATE TABLE `ql_filedinhkem`  (
   `idCreatedUser` int(11) NULL DEFAULT NULL,
   `chonBanHanh` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`idDK`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of ql_filedinhkem
